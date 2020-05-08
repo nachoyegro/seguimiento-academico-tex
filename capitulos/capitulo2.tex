@@ -1,0 +1,174 @@
+\chapter{Estado del arte}
+\label{sec:hello}
+
+\section[Crecimiento exponencial de los datos]{Crecimiento exponencial de los datos} 
+
+
+La humanidad, hasta el año 2005, creó 130 ExaBytes de datos (un exabyte son 1.073.741.824 GB). Para el año 2010, la cantidad de datos subió a 1200 exabytes. Para el año 2015, la cantidad de datos subió a 7900 exabytes. Y para el año 2020, se estima que esa cantidad llegó a los 40900 exabytes. [[14]]
+
+En resumen, la cantidad de datos que producimos los humanos está creciendo exponencialmente, y las universidades no son la excepción.
+
+
+
+\section[El papel de las universidades con respecto a los datos]{El papel de las universidades con respecto a los datos}
+
+Hoy en dia, se está transformando más en una norma que en una excepción para las universidades del mundo utilizar los datos que tienen sobre los estudiantes para propósitos académicos. Hay universidades que usan estos datos para ayudar a los estudiantes a tener éxito, o para ofrecerles ayuda cuando se considera que no están rindiendo, o bien para mantenerlos cursando y seguir recibiendo ingresos, en el caso de las privadas.
+El análisis de los datos se hace cada vez más frecuentementemente, y de manera más eficiente ya que las herramientas de análisis fueron mejorando.
+
+\section[Universidad de San Franciso]{Universidad de San Franciso}
+
+En la Universidad de San Frascisco (USF), los datos de los estudiantes tales como asistencia, notas, y materias son usados para determinar su progreso [[12]]. Cuando ven que un alumno está teniendo dificultades, usando la tecnología desarrollada por el departamento de sistemas de USF, alertan a los tutores para que hablen con el estudiante [[12]].
+Además, usan una aplicación móvil llamada USFMobile, que consulta datos de sus sistemas y generan alertas.
+Eventualmente, esos datos serán usados para "entender qué hacen los alumnos, y tratar de ayudarlos" [[12]].
+
+\section[Universidad de Missouri]{Universidad de Missouri}
+La Universidad de Missouri arma cuestionarios de 12 preguntas para los alumnos. El propósito es conocer cómo los estudiantes se desenvuelven en términos académicos, sociales y financieros. En caso que un alumno indique alguna inquietud, esa información es utilizada para tener un mayor impacto [[13]]. Los datos son almacenados en los sitemas de la universidad.
+Los tres temas principales que mostró la encuesta, estan relacionados con las dificultades de algunos cursos, la asistencia y las dificultades financieras de los alumnos. Estos datos le dieron a la Universidad un panorama y pudo actuar rápidamente en consecuencia. [[13]]
+
+\section[Universidad Estatal de Georgia]{Universidad Estatal de Georgia}
+
+La Universidad Estatal de Georgia se convirtió en un ejemplo a nivel nacional en Estados Unidos, por el papel que adaptó para ayudar a los estudiantes de bajos recursos y los de primera generación. 
+Esta universidad usa análisis predictivos para identificar a los alumnos que podrían abandonar o no llegar a recibirse. Esto lo logran usando información pasada, la cual es utilizada para predecir futuros eventos. 
+La Universidad de Georgia analizó 2 millones y medio de calificaciones obtenidas por los estudiantes a lo largo de 10 años para crear una lista de factores que predecían qué alumnos son menos probables a graduarse. Este sistema tiene más de 800 alertas, apuntadas a indicarle a los tutores acerca de sus estudiantes y así poder ayudarlos. Por ejemplo, un tutor recibe un alerta cuando un estudiante no recibe una nota satisfactoria en una materia que es fundamental. 
+
+
+
+
+
+\section[Trabajos relacionados]{Trabajos relacionados}
+
+\subsection[eCoach]{eCoach}
+ECoach es una aplicación diseñada en la Universidad de Michigan para estudiantes de primer año que toman clases de ciencia, tecnología, ingeniería o matemática. Esta aplicación toma datos que las universidades ya tienen, como las materias que cursó un alumno, las notas, etc.
+Otro aspecto importante de esta aplicación, es que se recibe *feedback* de parte de los alumnos con respecto a materias, profesores, horarios, etc.
+
+
+\section[El papel de la Universidad Nacional de Quilmes]{El papel de la Universidad Nacional de Quilmes}
+
+La Universidad Nacional de Quilmes tiene en la actualidad alrededor de , y a lo largo de su historia tuvo . Esos alumnos cursaron materias, tuvieron notas, y dejaron información que no está siendo explotada.
+Si un director de una carrera determinada, quisiera tener los datos de sus alumnos, tiene que hacer un pedido formal y esos datos se les son entregados en forma de planilla. Esos datos no están normalizados, y no existe un estándar. Es decir, un año vienen de una forma, y otro año de otra forma diferente.
+
+\section[Planillas de datos]{Planillas de datos}
+
+Las planillas que se le son entregadas a las carreras de la Universidad Nacional de Quilmes a través de un pedido son las siguientes.
+
+\subsection[Planes de estudio]{Planes de estudio}
+
+Los datos de planes de estudio traen información de las materias junto con el área a la que pertenecen, el núcleo, y los créditos, entre otros.
+Las columnas de la planilla es de la siguiente forma:
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    Carrera & Plan & Cuat. & Núcleo & Área & Materia & Créd. & Nombre \\ \hline
+    W & 2019 & 3 & B & Programación & 1035 & 12 & Base de Datos  \\
+    \hline
+    \end{tabular}
+    \caption{Ejemplo de una planilla de datos de un plan de estudios}
+    \label{tab:tabla_planes}
+\end{table}
+
+Con esta información, alcanzaría para tener los datos de las carreras, los planes y las materias.
+
+\subsection[Datos personales]{Datos personales}
+
+La planilla de datos personales trae la siguiente información en orden: 
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    Legajo & DNI & Apellido & Nombre & Email & Fecha & Carrera & Plan \\ \hline
+    21872 & 35905769 & Yegro & Juan & jy@unq.edu.ar & 01-02-2009 & W & 2019 \\
+    \hline
+    \end{tabular}
+    \caption{Ejemplo de una planilla de datos personales de los alumnos}
+    \label{tab:tabla_datos}
+\end{table}
+
+Estos datos son de ayuda para que los directores puedan identificar a los alumnos.
+
+\subsection[Materias cursadas]{Materias cursadas}
+
+Esta es, quizás, la planilla más cargada de datos ya que trae el historial de cursadas de una carrera determinada. Cada fila representa la cursada de un alumno en una materia determinada.
+
+
+\begin{outline}
+    \2 Legajo.
+    \2 DNI 
+    \2 Carrera 
+    \2 Regular 
+    \2 Calidad 
+    \2 Materia 
+    \2 Nombre 
+    \2 Fecha 
+    \2 Resultado 
+    \2 Nota 
+    \2 Forma 
+    \2 Credito 
+    \2 Acta 
+    \2 Acta E. 
+    \2 Plan
+\end{outline}
+
+\subsection[Inscripciones]{Inscripciones}
+
+Esta planilla indica las inscripciones a una materia por parte de un alumno.
+
+\begin{table}[]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Carrera & DNI & Legajo & Código de materia & Comision & Fecha  \\\hline
+    W & 35905769 & 21872 & 01036 & C2 & 01/03/2016  \\
+    \hline
+    \end{tabular}
+    \caption{Ejemplo de una planilla de inscripciones de alumnos}
+    \label{tab:tabla_datos}
+\end{table}
+
+
+\section[Análisis de requerimientos]{Análisis de requerimientos}
+
+Luego de hacer un análisis de requerimientos con directores de las distinas carreras de la Universidad Nacional de Quilmes, se llegó a que las principales necesidade son:
+
+\begin{outline}
+    \1 Se necesita que puedan calcularse el *avance de carrera*, *avance de diplomatura* y *avance de ciclo introductorio* en base a los créditos.
+    \1 Se necesita que puedan calcularse el porcentaje de materias aprobadas del total de la Carrera, el porcentaje de materias del Ciclo Básico, el porcentaje de materias del Ciclo Avanzado, el porcentaje de las Complementarias y el porcentaje del Ciclo Introductorio.
+    \1 Se necesita que puedan calcularse el porcentaje por área, que en el caso de la Licenciatura en Informática, estas áreas son: 
+        \2 Programación.
+        \2 Sistemas Informáticos.
+        \2 Procesos Informáticos.
+        \2 Desarrollo de Software.
+        \2 Teoría de la Computación.
+    \1 Se necesita cumplir con los pedidos específicos de CONEAU:
+        \2 Postulantes: cantidad de alumnos que se anotaron.
+        \2 Ingresantes: cantidad de alumnos que cursaron al menos una materia del Ciclo Introductorio.
+        \2 Alumnos: Los que no son ingresantes. Alumnos activos >> Buscar definicion.
+        \2 Tabla de ingresantes por cohorte.
+        \2 Tabla de cursantes por cohorte.
+        \2 Tabla de graduados por cohorte.
+        \2 Tasas de crecimiento anual y por cuatrimestre de las carreras, cursantes y solo ingresantes.
+    \1 Se necesita, con respecto a una materia determinada, conocer:
+        \2 Cantidad de aprobados.
+        \2 Cantidad de ausentes.
+        \2 Cantidad de desaprobados.
+    \1 Estudiantes con una determinada materia aprobada, que distinga en: materia aprobada por equivalencia, examen libre, pendiente, acta de cursada comun.
+    \1 Poder ver de los inscriptos a una materia cuáles son recursantes, y cuántas veces.
+    \1 Análisis retrospectivos y riesgos de deserción en base al historial general de la carrera.
+    \1 Identificar cuáles son las materias que “traban” a los estudiantes en las carreras. 
+    \1 Predicción de Inscriptos.
+    \1 Análisis de cumplimientos de prerrequisitos según plan de estudios.
+    
+    
+        
+\end{outline}
+
+\section[Conclusión]{Conclusión}
+
+Al implementar esta solución, los datos estarán disponibles para ser consultados por las carreras. Además, existe un potencial para que esta solucion pueda ser extendida en el futuro y que esto implique una mejor experiencia también para los alumnos.
+Llevar a cabo este proyecto implicará una mejora en cuanto a decisiones que se pueden tomar con respecto a los alumnos en pos de una mejor calidad educativa. Ayudará a determinar qué alumnos estan teniendo problemas, qué materias están trabando a los alumnos, cuáles son los alumnos que corren riego de desersión, cuáles están cerca de recibirse, etc.
+
+
+
