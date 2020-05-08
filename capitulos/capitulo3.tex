@@ -49,7 +49,7 @@ Como se puede ver en la figura, hay dos flujos de información. Uno para enviar 
 
 \section[Flask]{Flask}
 
-Flask es un framework chico para casi cualquier estándar. Suficientemente chico para que sea llamado "micro-framework" [[11]]. Pero ser chico no significa que hace menos que otros frameworks, sino que fue diseñado para ser extensible desde los cimientos. Provee un núcleo sólido con los servicios básicos, mientras el resto puede ser provisto por extensiones. El hecho de que permita elegir y poner la extensión que se desee, hace que se termine usando un framework que no tiene funcionalidades de más y sirve para exactamente lo que se necesite.
+Flask es un framework chico para casi cualquier estándar. Suficientemente chico para que sea llamado "micro-framework"\cite{Fsck}. Pero ser chico no significa que hace menos que otros frameworks, sino que fue diseñado para ser extensible desde los cimientos. Provee un núcleo sólido con los servicios básicos, mientras el resto puede ser provisto por extensiones. El hecho de que permita elegir y poner la extensión que se desee, hace que se termine usando un framework que no tiene funcionalidades de más y sirve para exactamente lo que se necesite.
 Flask tiene tres dependencias principales: rutas, debugging y WSGI (Web Server Gateway Interface, provisto por Werkzeug); los templates son provistos por Jinja2, y la interacción por línea de comandos viene de Click. Estas dependencias fueron escritas por Armin Ronacher, el autor de Flask.
 Flask no dispone de acceso nativo a bases de datos, validar formularios web, autenticación, u otras tareas de alto nivel. Sólo se pueden usar a través de extensiones. Como desarrollador, se puede decidir integrar la que se desee o escribir una propia. Esto va en contraste con grandes frameworks, ya que es complejo o imposible cambiar estas funcionalidades.
 
@@ -179,41 +179,41 @@ Si en un futuro se quisiera, por ejemplo, cambiar el módulo de encuestas, sólo
 REpresentational State Transfer (Transferencia de estado representacional, su traducción) es un estilo arquitectural inspirado en la Web. 
 Una parte importante es el concepto de **recursos**. 
 El servidor crea diferentes representaciones del recurso en un request. La forma en que es enviado esta desacoplado a cómo está guardado internamente. Cuando un cliente pide por un recurso, se le da una representación con la estructura de JSON.
-A lo largo de los años, se desarrollaron muchos servicios basados en la arquitectura REST, que usa las funcionalidades provistas por la capa de aplicación del protocolo HTTP [[1]] [[2]]. Esto resultó en un incremento en el interés comparado al tradicional SOAP (Simple Object Access Protocol). Además, grandes compañías como Twitter o Amazon usan interfaces del tipo REST en sus servicios, lo cual se puede ver en la documentación de sus APIs (Application Programming Interface).
+A lo largo de los años, se desarrollaron muchos servicios basados en la arquitectura REST, que usa las funcionalidades provistas por la capa de aplicación del protocolo HTTP \cite{RestSoap} \cite{IETF}. Esto resultó en un incremento en el interés comparado al tradicional SOAP (Simple Object Access Protocol). Además, grandes compañías como Twitter o Amazon usan interfaces del tipo REST en sus servicios, lo cual se puede ver en la documentación de sus APIs (Application Programming Interface).
 Mas allá de la tendencia, no hay estándares o guias de cómo desarrollar un servicio web RESTful. En lugar de esto, existen buenas prácticas.
 
 \subsection[No versionado]{No versionado}
 
-Versionar una API Web es una de las consideraciones más importantes a la hora de diseñar un servicio web, ya que la API representa el punto de acceso al servicio y oculta su implementación. Es por esto que una interfaz web nunca deberia ser desplegada sin un identificador de version [[3]]. Para versionar, existen diferentes acercamientos como incluirlo en la URI (Uniform Resource Identifier) del servicio web o usando el header HTTP para seleccionar la versión apropiada [[3]]. Pero el servicio web basado en REST no necesita ser versionado debido a hipermedia. Es por esto que los servicios web RESTful pueden ser comparados con los sitios web tradicionales, que pueden ser accedidos por todos los navegadores cuando se cambia el contenido del sitio. Asi que no sería necesario agregar información del lado del cliente.
-Mas allá de esto, el uso de versionado genera un impacto negativo en los servicios web ya desplegados, llevando a la frase "El versionado de una interfaz, es una forma educada de destruir las aplicaciones ya desplegadas" [[4]], ya que aumenta el esfuerzo por mantenerlos
+Versionar una API Web es una de las consideraciones más importantes a la hora de diseñar un servicio web, ya que la API representa el punto de acceso al servicio y oculta su implementación. Es por esto que una interfaz web nunca deberia ser desplegada sin un identificador de version \cite{WAPID}. Para versionar, existen diferentes acercamientos como incluirlo en la URI (Uniform Resource Identifier) del servicio web o usando el header HTTP para seleccionar la versión apropiada \cite{WAPID}. Pero el servicio web basado en REST no necesita ser versionado debido a hipermedia. Es por esto que los servicios web RESTful pueden ser comparados con los sitios web tradicionales, que pueden ser accedidos por todos los navegadores cuando se cambia el contenido del sitio. Asi que no sería necesario agregar información del lado del cliente.
+Mas allá de esto, el uso de versionado genera un impacto negativo en los servicios web ya desplegados, ya que aumenta el esfuerzo por mantenerlos.
 
 
 \subsection[Descripción de los recursos]{Descripción de los recursos}
 
 La descripción de los recursos se relaciona con la usabilidad de los servicios web, ya que éstos son una representación del modelo. Para una correcta descripción, existen algunas buenas prácticas:
 \begin{outline}
-    \1 Deberían usarse sustantivos para los recursos [[3]].
-    \1 El nombre del recurso debería ser un nombre específico del dominio, para que la semántica pueda ser interpretada por cualquier usuario sin conocimientos adicionales [[3]]
-    \1 Debería evitarse la mezcla del uso del plural y singular para garantizar coherencia [[3]].
-    \1 Debería usarse la convención de nombres de JavaScript, ya que el tipo JavaScript Object Notation (JSON) es el tipo de dato más usado para la comunicación entre el cliente y el servidor [[3]].
+    \1 Deberían usarse sustantivos para los recursos \cite{WAPID}.
+    \1 El nombre del recurso debería ser un nombre específico del dominio, para que la semántica pueda ser interpretada por cualquier usuario sin conocimientos adicionales \cite{WAPID}
+    \1 Debería evitarse la mezcla del uso del plural y singular para garantizar coherencia \cite{WAPID}.
+    \1 Debería usarse la convención de nombres de JavaScript, ya que el tipo JavaScript Object Notation (JSON) es el tipo de dato más usado para la comunicación entre el cliente y el servidor \cite{WAPID}.
 \end{outline}
 \subsection[Identificación de recursos]{Identificación de recursos}
 
-Deberían usarse URIs para la identificación única de recursos [[5]]. Para esto existen algunas buenas prácticas:
+Deberían usarse URIs para la identificación única de recursos \cite{ASDNB}. Para esto existen algunas buenas prácticas:
 \begin{outline}
-    \1 Una URI debería ser autoexplicativa, de forma tal que no debería necesitar información adicional para su uso [[3]].
-    \1 No deberían existir verbos en la URI, ya que esto implica una orientación a métodos como SOAP [[3]].
-    \1 Un recurso debería ser represantado por dos URIs. La primera para representar el conjunto de estados de un recurso específico, y la segunda para representar un estado en particular de ese conjunto de estados [[3]].
-    \1 El identificador de un estado específico debería ser dificil de predecir [[6]] y no referenciar objetos directamente, según OWASP (Open Web Application Security Project), si no existiera una capa de seguridad.
+    \1 Una URI debería ser autoexplicativa, de forma tal que no debería necesitar información adicional para su uso \cite{WAPID}.
+    \1 No deberían existir verbos en la URI, ya que esto implica una orientación a métodos como SOAP \cite{WAPID}.
+    \1 Un recurso debería ser represantado por dos URIs. La primera para representar el conjunto de estados de un recurso específico, y la segunda para representar un estado en particular de ese conjunto de estados \cite{WAPID}.
+    \1 El identificador de un estado específico debería ser dificil de predecir y no referenciar objetos directamente, según OWASP (Open Web Application Security Project), si no existiera una capa de seguridad.
 \end{outline}
 
 \subsection[Manejo de errores]{Manejo de errores}
 
 Los mensajes de error tienen que ser claros y entendibles, para que su causa pueda ser fácilmente identificada. Con esto en mente, se pueden reconocer algunas buenas prácticas:
 \begin{outline}
-    \1 La cantidad de códigos de estados de HTTP debería estar limitado para reducir el esfuerzo de buscar en la especificación [[3]].
-    \1 El uso de los códigos de estado de HTTP tienen que corresponderse con la especificación oficial de HTTP [[7]].
-    \1 Debería darse un mensaje de error detallado como una pista del error causado del lado del cliente [[3]]. Por este motivo, el mensaje de error debería tener los siguientes ingredientes:
+    \1 La cantidad de códigos de estados de HTTP debería estar limitado para reducir el esfuerzo de buscar en la especificación \cite{WAPID}.
+    \1 El uso de los códigos de estado de HTTP tienen que corresponderse con la especificación oficial de HTTP \cite{HTTP}.
+    \1 Debería darse un mensaje de error detallado como una pista del error causado del lado del cliente \cite{WAPID}. Por este motivo, el mensaje de error debería tener los siguientes ingredientes:
         \2 Un mensaje para los desarrolladores, que describe la causa del error y algunas pistas sobre cómo resolver el problema.
         \2 Un mensaje que puede ser mostrado al usuario
         \2 Un código de error específico de la aplicación
@@ -224,7 +224,7 @@ Los mensajes de error tienen que ser claros y entendibles, para que su causa pue
 Cada URI de un recurso puede ser extendida con parámetros para proveer información opcional al servicio. A continuación se detallan cuatro casos de uso:
 \begin{outline}
     \1 Filtrado: para filtrar información de un recurso, puede usarse sus atributos o algun lenguaje de queries. La elección de una de estas variantes, depende de la necesidad del poder de expresión que se tenga para filtrar. 
-    \1 Ordenamiento: para ordenar la información, se recomienda [[8]] una lista de atributos separados por coma con el parámetro "sort" en la URI, seguido por un signo de más (+) como prefijo para un orden ascendente, o un signo menos (-) para un orden descendente.
+    \1 Ordenamiento: para ordenar la información, se recomienda \cite{BPRA} una lista de atributos separados por coma con el parámetro "sort" en la URI, seguido por un signo de más (+) como prefijo para un orden ascendente, o un signo menos (-) para un orden descendente.
     \1 Selección: la selección de información en forma de atributos reduce el tamaño de transmisión sobre la red, respondiendo sólo con la información pedida. Para este propósito, se recomienda una lista de atributos separadas por coma.
     \1 Paginación: La paginación permite partir la información en varias páginas virtuales, mientras se referencian la página anterior, la próxima, la primera y la última. 
 \end{outline}
@@ -232,9 +232,9 @@ Cada URI de un recurso puede ser extendida con parámetros para proveer informac
 
 Usando REST como el estilo de arquitectura subyacente de un sistema, el cliente interactúa con las representaciones de un recurso en lugar de usarlo directamente. La interacción entre el cliente y el servidor esta construido en la capa de aplicación del protocolo HTTP, que ya provee cierta funcionalidad para la comunicación. Para la interacción con un recurso, podriamos identificar tres buenas practicas diferentes:
 \begin{outline}
-    \1 El uso de los métodos HTTP deberían ser de acuerdo a las semánticas definidas por la especificación oficial de HTTP [[3]]. Así, el método GET de HTTP sólo debería ser usado para las operaciones sin efectos secundarios. Para una mejor visión general, la tabla a continuación muestra los métodos HTTP mas usados y sus características. Estas características pueden ser usadas para asociar los métodos HTTP con el correcto uso de la creación, lectura, edición y borrado de recursos (CRUD) [[9]].
+    \1 El uso de los métodos HTTP deberían ser de acuerdo a las semánticas definidas por la especificación oficial de HTTP \cite{WAPID}. Así, el método GET de HTTP sólo debería ser usado para las operaciones sin efectos secundarios. Para una mejor visión general, la tabla a continuación muestra los métodos HTTP mas usados y sus características. Estas características pueden ser usadas para asociar los métodos HTTP con el correcto uso de la creación, lectura, edición y borrado de recursos (CRUD) \cite{RVINOSKI}.
     \1 El soporte de la operación OPTIONS es recomendada si una gran cantidad de datos tienen que ser transmitidos, ya que permite al cliente pedir los métodos soportados de la representación actual antes de transmitir la información por un medio compartido. 
-    \1 El soporte del GET condicional debería ser considerado durante el desarrollo de un servicio basado en HTTP, ya que previene al servidor de tranmitir datos ya enviados anteriormente. Solo si hay modificaciones de la información solicitada desde la última solicitud, el servidor responde con la última representación [[9]].
+    \1 El soporte del GET condicional debería ser considerado durante el desarrollo de un servicio basado en HTTP, ya que previene al servidor de tranmitir datos ya enviados anteriormente. Solo si hay modificaciones de la información solicitada desde la última solicitud, el servidor responde con la última representación  \cite{RVINOSKI}.
 \end{outline}
 
 \begin{table}[]
@@ -403,7 +403,7 @@ Una opción es agregarlo a una lista negra y cuando alguien pida un access token
 
 \subsection[Introducción]{Introducción}
 
-Docker es una plataforma abierta para desarrollar, transportar, y ejecutar aplicaciones de forma rápida. Docker permite que las aplicaciones corran de forma separada de la infraestructura del host. Permite tambien enviar código, testear, desplegar rápido y acortar el ciclo entre escribir el código y correrlo. Docker loga esto combinando una plataforma de virtualización liviana con herramientas que permiten manejar y desplegar aplicaciones [[10]].
+Docker es una plataforma abierta para desarrollar, transportar, y ejecutar aplicaciones de forma rápida. Docker permite que las aplicaciones corran de forma separada de la infraestructura del host. Permite tambien enviar código, testear, desplegar rápido y acortar el ciclo entre escribir el código y correrlo. Docker loga esto combinando una plataforma de virtualización liviana con herramientas que permiten manejar y desplegar aplicaciones \cite{Dj}.
 
 Docker usa funcionalidades del kernel de Linux como cgroups, que limita y aisla el uso de recursos, y namespaces, que permite a los contenedores independientes correr en una única instancia de Linux evitando la sobrecarga de iniciar máquinas virtuales.
 Además, provee una forma para correr aplicaciones aisladas en un contenedor de forma segura, y que estos contenedores puedan correr de forma simultánea en un mismo host compartiendo el mismo kernel. Aunque cada contenedor puede usar una cantidad de recursos definidos por el host.
