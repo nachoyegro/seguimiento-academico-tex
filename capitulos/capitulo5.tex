@@ -1,8 +1,22 @@
-\chapter{Implementación y pruebas realizadas}
+\chapter{Pruebas realizadas}
 \label{sec:implementacion}
 
-\section[Pruebas Realizadas]{Pruebas Realizadas}
+\section[Pruebas y resultados]{Pruebas y resultados}
 
+\subsection[Resultados esperados]{Resultados esperados}
+
+Se espera con este desarrollo tener un sistema capaz de brindarle datos a todos los interesados. Para que esto se cumpla, la implementación tiene que ser capaz de manejar todos los pedidos que recibe y responder en consecuencia. 
+Si bien la problemática inicial implica que sólo se consultarán datos para analizarlos y ser visualizados por los directores de las carreras de la Universidad Nacional de Quilmes, no hay que descartar que pueda ser extendido dado su potencial.
+Para garantizar que todo funcione de manera correcta se realizaron diferentes pruebas con escenarios cambiantes.
+Para todas las pruebas se usaron los mismos URIs y se realizaron sobre una base de datos con 1.424 alumnos y 13.234 materias cursadas por estos alumnos.
+La arquitectura utilizada para las pruebas se asemeja a la que dispondrá a la hora de la implementación.
+
+
+\break
+\subsection{Pruebas con 100 usuarios simultáneos}
+\break
+En primer lugar, se realizó una prueba en la cual 100 usuarios simultáneos se encuentran haciendo pedidos al núcleo, el cual está desplegado en una sola instancia de docker.
+Esta prueba duró 5 minutos y los resultados se muestran a continuación:
 \begin{table}[]
     \centering
     \makegapedcells
@@ -30,6 +44,7 @@
     \label{tab:tabla_planes}
 \end{table}
 
+En este caso el núcleo fue capaz de resolver todos los pedidos y responder sin problemas.
 
 \begin{table}[]
     \centering
@@ -43,7 +58,22 @@
     \label{tab:tabla_planes}
 \end{table}
 
+En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
 
+\begin{table}[]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|c}
+    \hline
+    APDEX Total & Tolerancia & Frustración\\ \hline
+    0.064 & 500ms & 1sec 500ms \\ \hline
+    \end{tabular}
+    \caption{APDEX de la prueba con 100 usuarios durante 5 minutos}
+    \label{tab:tabla_planes}
+\end{table}
+
+
+\subsection{Pruebas con 500 usuarios simultáneos}
 \begin{table}[]
     \centering
     \makegapedcells
@@ -88,6 +118,20 @@
 \begin{table}[]
     \centering
     \makegapedcells
+    \begin{tabular}{|c|c|c}
+    \hline
+    APDEX Total & Tolerancia & Frustración\\ \hline
+    0.012 & 500ms & 1sec 500ms \\ \hline
+    \end{tabular}
+    \caption{APDEX de la prueba con 500 usuarios durante 10 minutos y una instancia de la aplicación}
+    \label{tab:tabla_planes}
+\end{table}
+
+
+
+\begin{table}[]
+    \centering
+    \makegapedcells
     \begin{tabular}{|c|c|c|c|}
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
@@ -124,3 +168,20 @@
     \caption{Recursos en promedio consumidos por los contenedores durante la prueba}
     \label{tab:tabla_planes}
 \end{table}
+
+\begin{table}[]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|c}
+    \hline
+    APDEX Total & Tolerancia & Frustración\\ \hline
+    0.067 & 500ms & 1sec 500ms \\ \hline
+    \end{tabular}
+    \caption{APDEX de la prueba con 500 usuarios durante 10 minutos y dos instancias de la aplicación}
+    \label{tab:tabla_planes}
+\end{table}
+\break
+\section{Conclusión sobre las pruebas}
+
+Esto es una conclusion
+
