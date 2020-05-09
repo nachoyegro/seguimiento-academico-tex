@@ -16,28 +16,23 @@ La arquitectura utilizada para las pruebas se asemeja a la que dispondrá a la h
 \subsection{Pruebas con 100 usuarios simultáneos}
 \break
 En primer lugar, se realizó una prueba en la cual 100 usuarios simultáneos se encuentran haciendo pedidos al núcleo, el cual está desplegado en una sola instancia de docker.
-Esta prueba duró 5 minutos y los resultados se muestran a continuación:
+Esta prueba duró 5 minutos y los resultados se muestran a continuación.
+
+
+\subsubsection{Resultados generales de la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
     \begin{tabular}{|c|c|c|c|}
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
-    Total & 1983 & 0.00\% & 9292.79 \\ \hline
-    Alumno | Cursadas & 277 & 0.00\% & 9195.38 \\ \hline
-    Alumno | Inscripciones & 253 & 0.00\% & 9301.19\\ \hline
-    Carrera | Nº cursantes & 114 & 0.00\% & 9630.04\\ \hline
-    Carrera | Nº graduados & 107 & 0.00\% & 9271.04\\ \hline
-    Carrera | Nº graduados año & 101 & 0.00\% & 9454.49\\ \hline
-    Carrera | Nº ingresantes & 133 & 0.00\% & 9369.06\\ \hline
-    Carrera | Nº ingresantes año & 139 & 0.00\% & 9127.65\\ \hline
-    Carrera | Nº postulantes & 121 & 0.00\% & 9382.31\\ \hline
-    Carrera | Nº postulantes año & 127 & 0.00\% & 9137.06\\ \hline
-    Carreras & 83 & 0.00\% & 8694.02\\ \hline
-    Materia | Alumnos & 265 & 0.00\% & 9076.91\\ \hline
-    Materias de un plan & 89 & 0.00\% & 10283.25\\ \hline
-    Plan | Materias necesarias & 95 & 0.00\% & 9376.76\\ \hline
-    Planes de carrera & 79 & 0.00\% & 9355.29\\ \hline
+    Total & 6825 & 3.06\% & 23469.53 \\ \hline
+    Carrera | Nº cursantes & 381 & 6.56\% & 27740.51\\ \hline
+    Carrera | Nº graduados & 345 & 3.77\% & 25571.40\\ \hline
+    Carrera | Nº ingresantes & 477 & 1.89\% & 23485.62\\ \hline
+    Carrera | Nº postulantes & 408 & 3.43\% & 22162.30\\ \hline
+    Plan | Materias necesarias & 292 & 2.05\% & 21886.82\\ \hline
+    Planes de carrera & 232 & 0.43\% & 18554.02\\ \hline
 
     \end{tabular}
     \caption{Pruebas realizadas con 100 usuarios simultáneos durante 5 minutos}
@@ -46,6 +41,7 @@ Esta prueba duró 5 minutos y los resultados se muestran a continuación:
 
 En este caso el núcleo fue capaz de resolver todos los pedidos y responder sin problemas.
 
+\subsubsection{Resultados sobre el uso de recursos durate la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
@@ -60,41 +56,50 @@ En este caso el núcleo fue capaz de resolver todos los pedidos y responder sin 
 
 En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
 
+
+\subsubsection{APDEX de la prueba}
+
+APDEX (Índice de Performance de la Aplicación, por sus siglas en inglés) es un estandard abierto para medir la performance de una a aplicación de software. Su propósito es convertir las mediciones en información sobre la satisfacción del usuario, al especificar una forma uniforme de analizar e informar sobre el grado en que el rendimiento medido cumple con las expectativas del usuario.
+Para realizar una medición APDEX, es necesario establecer un tiempo \emph{satisfactorio} y un tiempo \emph{tolerable}.
+Una vez establecidos estos valores y tendo los resultados de la prueba, se calcula el índice:
+
+\begin{align*}
+  Apdex = \frac{Satisfactorios + \frac{Tolerables}{2}}{Total}\\
+\end{align*}
+\break
 \begin{table}[]
     \centering
     \makegapedcells
     \begin{tabular}{|c|c|c}
     \hline
     APDEX Total & Tolerancia & Frustración\\ \hline
-    0.064 & 500ms & 1sec 500ms \\ \hline
+    0.064 & 2 seg & 3 seg \\ \hline
     \end{tabular}
     \caption{APDEX de la prueba con 100 usuarios durante 5 minutos}
     \label{tab:tabla_planes}
 \end{table}
 
 
+\break
+
 \subsection{Pruebas con 500 usuarios simultáneos}
+Luego de la primer prueba, se realizó una segunda en la cual 500 usuarios simultáneos se encuentran haciendo pedidos al núcleo, el cual está desplegado en una sola instancia de docker.
+Esta prueba duró 10 minutos y los resultados se muestran a continuación.
+
+\subsubsection{Resultados generales de la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
     \begin{tabular}{|c|c|c|c|}
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
-    Total & 5399 & 25.12\% & 29619.99 \\ \hline
-    Alumno | Cursadas & 866 & 32.45\% & 32554.95 \\ \hline
-    Alumno | Inscripciones & 704 & 24.01\% & 29306.18\\ \hline
-    Carrera | Nº cursantes & 285 & 20.00\% & 27304.52\\ \hline
-    Carrera | Nº graduados & 262 & 20.61\%	& 27976.94\\ \hline
-    Carrera | Nº graduados año & 232 & 19.40\% & 26607.76\\ \hline
-    Carrera | Nº ingresantes & 394 & 27.92\% & 30526.73\\ \hline
-    Carrera | Nº ingresantes año & 433 & 31.87\% & 32665.21\\ \hline
-    Carrera | Nº postulantes & 323 & 22.91\% & 28983.54\\ \hline
-    Carrera | Nº postulantes año & 358 & 27.37\% & 30189.70\\ \hline
-    Carreras & 182 & 10.99\% & 23311.08\\ \hline
-    Materia | Alumnos & 786 & 30.66\% & 31627.46\\ \hline
-    Materias de un plan & 192 & 12.50\%	& 25479.56\\ \hline
-    Plan | Materias necesarias & 211 & 12.32\% & 25203.14\\ \hline
-    Planes de carrera & 171 & 11.11\% & 24307.15\\ \hline
+    Total & 6825 & 3.06\% & 23469.53 \\ \hline
+    Carrera | Nº cursantes & 381 & 6.56\% & 27740.51\\ \hline
+    Carrera | Nº graduados & 345 & 3.77\% & 25571.40\\ \hline
+    Carrera | Nº ingresantes & 477 & 1.89\% & 23485.62\\ \hline
+    Carrera | Nº postulantes & 408 & 3.43\% & 22162.30\\ \hline
+    Plan | Materias necesarias & 292 & 2.05\% & 21886.82\\ \hline
+    Planes de carrera & 232 & 0.43\% & 18554.02\\ \hline
 
     \end{tabular}
     \caption{Pruebas realizadas con 500 usuarios simultáneos durante 10 minutos}
@@ -102,7 +107,7 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
 \end{table}
 
 
-
+\subsubsection{Resultados sobre el uso de recursos durate la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
@@ -115,6 +120,7 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
     \label{tab:tabla_planes}
 \end{table}
 
+\subsubsection{APDEX de la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
@@ -127,8 +133,11 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
     \label{tab:tabla_planes}
 \end{table}
 
+\subsection{Pruebas con 500 usuarios simultáneos}
+Luego de la primer prueba, se realizó una segunda en la cual 500 usuarios simultáneos se encuentran haciendo pedidos al núcleo, el cual está desplegado en una sola instancia de docker.
+Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 
-
+\subsubsection{Resultados generales de la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
@@ -136,18 +145,10 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
     Total & 6825 & 3.06\% & 23469.53 \\ \hline
-    Alumno | Cursadas & 1033 & 2.71\% & 22979.20 \\ \hline
-    Alumno | Inscripciones & 895 & 1.90\% & 21558.85\\ \hline
     Carrera | Nº cursantes & 381 & 6.56\% & 27740.51\\ \hline
     Carrera | Nº graduados & 345 & 3.77\% & 25571.40\\ \hline
-    Carrera | Nº graduados año & 317 & 3.15\% & 24281.65\\ \hline
     Carrera | Nº ingresantes & 477 & 1.89\% & 23485.62\\ \hline
-    Carrera | Nº ingresantes año & 516 & 4.26\% & 25193.41\\ \hline
     Carrera | Nº postulantes & 408 & 3.43\% & 22162.30\\ \hline
-    Carrera | Nº postulantes año & 443 & 1.81\% & 23104.57\\ \hline
-    Carreras & 251 & 3.19\% & 21803.32\\ \hline
-    Materia | Alumnos & 964 & 4.05\% & 24847.81\\ \hline
-    Materias de un plan & 271 & 3.32\% & 23826.26\\ \hline
     Plan | Materias necesarias & 292 & 2.05\% & 21886.82\\ \hline
     Planes de carrera & 232 & 0.43\% & 18554.02\\ \hline
 
@@ -155,7 +156,7 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
     \caption{Pruebas realizadas con 500 usuarios simultáneos durante 10 minutos}
     \label{tab:tabla_planes}
 \end{table}
-
+\subsubsection{Resultados sobre el uso de recursos durate la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
@@ -168,7 +169,7 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
     \caption{Recursos en promedio consumidos por los contenedores durante la prueba}
     \label{tab:tabla_planes}
 \end{table}
-
+\subsubsection{APDEX de la prueba}
 \begin{table}[]
     \centering
     \makegapedcells
