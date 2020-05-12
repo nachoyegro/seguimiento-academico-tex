@@ -237,7 +237,7 @@ Usando REST como el estilo de arquitectura subyacente de un sistema, el cliente 
     \1 El soporte del GET condicional debería ser considerado durante el desarrollo de un servicio basado en HTTP, ya que previene al servidor de tranmitir datos ya enviados anteriormente. Solo si hay modificaciones de la información solicitada desde la última solicitud, el servidor responde con la última representación  \cite{RVINOSKI}.
 \end{outline}
 
-\begin{table}[]
+\begin{table}[!htbp]
     \centering
     \makegapedcells
     \begin{tabular}{|c|c|c|}
@@ -311,11 +311,7 @@ Un ejemplo de payload puede ser:
   "token_type": "refresh",
   "exp": 1582059853,
   "jti": "e9b85778f3f44decba69a611e4e1c700",
-  "user_id": 1,
-  "carreras": [
-    "W"
-  ],
-  "username": "admin"
+  "user_id": 1
 }
 \end{lstlisting}
 

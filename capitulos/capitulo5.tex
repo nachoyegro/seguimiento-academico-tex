@@ -26,14 +26,13 @@ Esta prueba duró 5 minutos y los resultados se muestran a continuación.
     \begin{tabular}{|c|c|c|c|}
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
-    Total & 6825 & 3.06\% & 23469.53 \\ \hline
-    Carrera | Nº cursantes & 381 & 6.56\% & 27740.51\\ \hline
-    Carrera | Nº graduados & 345 & 3.77\% & 25571.40\\ \hline
-    Carrera | Nº ingresantes & 477 & 1.89\% & 23485.62\\ \hline
-    Carrera | Nº postulantes & 408 & 3.43\% & 22162.30\\ \hline
-    Plan | Materias necesarias & 292 & 2.05\% & 21886.82\\ \hline
-    Planes de carrera & 232 & 0.43\% & 18554.02\\ \hline
-
+    Total & 16977 & 0.00\% & 1043.79\\ \hline
+    Carrera | graduados & 2834 & 0.00\% & 1038.98\\ \hline
+    Carrera | ingresantes & 2871 & 0.00\% & 1057.51\\ \hline
+    Carrera | postulantes & 2850 & 0.00\% & 1046.61\\ \hline
+    Carreras & 2793 & 0.00\% & 1851.00\\ \hline
+    Plan | Materias necesarias & 5629 & 0.00\% & 1036.10\\ \hline
+    
     \end{tabular}
     \caption{Pruebas realizadas con 100 usuarios simultáneos durante 5 minutos}
     \label{tab:tabla_planes}
@@ -45,7 +44,7 @@ En este caso el núcleo fue capaz de resolver todos los pedidos y responder sin 
 \begin{table}[!htbp]
     \centering
     \makegapedcells
-    \begin{tabular}{|c|c|c}
+    \begin{tabular}{|c|c|c|}
     \hline
     Contenedor & CPU & Memoria (MB)\\ \hline
     Núcleo & 68\% & 55 \\ \hline
@@ -70,10 +69,10 @@ Una vez establecidos estos valores y tendo los resultados de la prueba, se calcu
 \begin{table}[!htbp]
     \centering
     \makegapedcells
-    \begin{tabular}{|c|c|c}
+    \begin{tabular}{|c|c|c|}
     \hline
     APDEX Total & Tolerancia & Frustración\\ \hline
-    0.064 & 2 seg & 3 seg \\ \hline
+    0.995 & 2 seg & 3 seg \\ \hline
     \end{tabular}
     \caption{APDEX de la prueba con 100 usuarios durante 5 minutos}
     \label{tab:tabla_planes}
@@ -93,28 +92,25 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     \begin{tabular}{|c|c|c|c|}
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
-    Total & 6825 & 3.06\% & 23469.53 \\ \hline
-    Carrera | Nº cursantes & 381 & 6.56\% & 27740.51\\ \hline
-    Carrera | Nº graduados & 345 & 3.77\% & 25571.40\\ \hline
-    Carrera | Nº ingresantes & 477 & 1.89\% & 23485.62\\ \hline
-    Carrera | Nº postulantes & 408 & 3.43\% & 22162.30\\ \hline
-    Plan | Materias necesarias & 292 & 2.05\% & 21886.82\\ \hline
-    Planes de carrera & 232 & 0.43\% & 18554.02\\ \hline
-
+    Total & 71331 & 56.62\% & 2164.69\\ \hline
+    Carrera | graduados & 11930 & 56.32\% & 2195.59\\ \hline
+    Carrera | ingresantes & 12111 & 55.81\% & 2382.85\\ \hline
+    Carrera | postulantes & 12019 & 56.14\% & 2296.47\\ \hline
+    Carreras & 11684 & 57.56\% & 2049.56\\ \hline
+    Plan | Materias necesarias & 23587 & 56.98\% & 2026.94\\
     \end{tabular}
     \caption{Pruebas realizadas con 500 usuarios simultáneos durante 10 minutos}
     \label{tab:tabla_planes}
 \end{table}
 
-
 \subsubsection{Resultados sobre el uso de recursos durate la prueba}
 \begin{table}[!htbp]
     \centering
     \makegapedcells
-    \begin{tabular}{|c|c|c}
+    \begin{tabular}{|c|c|c|}
     \hline
     Contenedor & CPU & Memoria (MB)\\ \hline
-    Núcleo & 77\% & 55 \\ \hline
+    Núcleo & 88\% & 55 \\ \hline
     \end{tabular}
     \caption{Recursos en promedio consumidos por el contenedor durante la prueba}
     \label{tab:tabla_planes}
@@ -124,17 +120,17 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 \begin{table}[!htbp]
     \centering
     \makegapedcells
-    \begin{tabular}{|c|c|c}
+    \begin{tabular}{|c|c|c|}
     \hline
     APDEX Total & Tolerancia & Frustración\\ \hline
-    0.012 & 500ms & 1sec 500ms \\ \hline
+    0.265 & 2 seg & 3 seg \\ \hline
     \end{tabular}
     \caption{APDEX de la prueba con 500 usuarios durante 10 minutos y una instancia de la aplicación}
     \label{tab:tabla_planes}
 \end{table}
 
-\subsection{Pruebas con 500 usuarios simultáneos}
-Luego de la primer prueba, se realizó una segunda en la cual 500 usuarios simultáneos se encuentran haciendo pedidos al núcleo, el cual está desplegado en una sola instancia de docker.
+\subsection{Pruebas con 500 usuarios simultáneos con dos instancias}
+Luego de la primer prueba, se realizó una segunda en la cual 500 usuarios simultáneos se encuentran haciendo pedidos al núcleo que desplegado en dos instancias de docker.
 Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 
 \subsubsection{Resultados generales de la prueba}
@@ -144,23 +140,22 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     \begin{tabular}{|c|c|c|c|}
     \hline
     Nombre del Pedido & Cantidad & Errores (\%) & Tiempo Promedio (ms) \\ \hline
-    Total & 6825 & 3.06\% & 23469.53 \\ \hline
-    Carrera | Nº cursantes & 381 & 6.56\% & 27740.51\\ \hline
-    Carrera | Nº graduados & 345 & 3.77\% & 25571.40\\ \hline
-    Carrera | Nº ingresantes & 477 & 1.89\% & 23485.62\\ \hline
-    Carrera | Nº postulantes & 408 & 3.43\% & 22162.30\\ \hline
-    Plan | Materias necesarias & 292 & 2.05\% & 21886.82\\ \hline
-    Planes de carrera & 232 & 0.43\% & 18554.02\\ \hline
-
+    Total & 75352 & 3.79\% & 4434.05\\ \hline
+    Carrera | graduados & 12350 & 3.78\% & 4419.90\\ \hline
+    Carrera | ingresantes & 12489 & 3.66\% & 4761.72\\ \hline
+    Carrera | postulantes & 5937 & 3.79\% & 4568.80\\ \hline
+    Carreras & 5605 & 3.89\% & 4167.33\\ \hline
+    Plan | Materias necesarias & 11478 & 3.82\% & 4329.57\\
     \end{tabular}
     \caption{Pruebas realizadas con 500 usuarios simultáneos durante 10 minutos}
     \label{tab:tabla_planes}
 \end{table}
+
 \subsubsection{Resultados sobre el uso de recursos durate la prueba}
 \begin{table}[!htbp]
     \centering
     \makegapedcells
-    \begin{tabular}{|c|c|c}
+    \begin{tabular}{|c|c|c|}
     \hline
     Contenedor & CPU & Memoria (MB)\\ \hline
     Núcleo-1 & 67\% & 54 \\ \hline
@@ -173,7 +168,7 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 \begin{table}[!htbp]
     \centering
     \makegapedcells
-    \begin{tabular}{|c|c|c}
+    \begin{tabular}{|c|c|c|}
     \hline
     APDEX Total & Tolerancia & Frustración\\ \hline
     0.067 & 500ms & 1sec 500ms \\ \hline
@@ -184,5 +179,5 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 \break
 \section{Conclusión sobre las pruebas}
 
-Esto es una conclusion
+
 

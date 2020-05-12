@@ -1,4 +1,88 @@
 \chapter{Anexos}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Documentos, tablas, cronogramas, c\'alculos, planos etc. que dificulten la lectura del informe y que han sido citados en \'este. Agregar \# c\'odigo fuente
+\section{Pantallas básicas del Núcleo}
+
+
+\subsubsection{Login}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.3]{images/nucleo/nucleo-login.png}
+  \captionof{figure}{Pantalla de login}
+  \label{fig:nucleo-login}
+\end{figure}
+
+\subsubsection{Home}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.3]{images/nucleo/nucleo-home.png}
+  \captionof{figure}{Pantalla principal del admin}
+  \label{fig:nucleo-home}
+\end{figure}
+
+\subsubsection{Importadores}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.3]{images/nucleo/nucleo-importador.png}
+  \captionof{figure}{Pantalla de importadores}
+  \label{fig:nucleo-importador}
+\end{figure}
+
+\subsubsection{Listado}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.3]{images/nucleo/nucleo-list.png}
+  \captionof{figure}{Pantalla de listados}
+  \label{fig:nucleo-listado}
+\end{figure}
+
+\subsubsection{Edicion}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.3]{images/nucleo/nucleo-edit.png}
+  \captionof{figure}{Pantalla de edición}
+  \label{fig:nucleo-edicion}
+\end{figure}
+
+\subsubsection{Pedir Token}
+\begin{table}[!htbp]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    URI & Método & Parámetros & Content-Type \\ \hline
+    api/token/ & POST & username,password & application/x-www-form-urlencoded \\ \hline
+    \end{tabular}
+    \caption{Método para pedir un token al núcleo}
+    \label{tab:tabla_token}
+\end{table}
+
+\subsubsection{API}
+\begin{table}[!htbp]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|c|}
+    \hline
+    URI & Método & Autorización\\ \hline
+    carreras/<str:cc>/alumnos/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/alumnos-completos/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/planes/<int:plan\_anio>/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/planes/<int:pa>/cantidad-materias-necesarias/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/planes/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/materiascursadas/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/inscripciones/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-graduados/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-graduados/<int:anio>/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-cursantes/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-cursantes/<int:anio>/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-ingresantes/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-ingresantes/<int:anio>/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-postulantes/<int:anio>/ & GET & Bearer  \\ \hline
+    carreras/<str:cc>/cantidad-postulantes/ & GET & Bearer  \\ \hline
+    alumno/<str:legajo>/cursadas/ & GET & Bearer  \\ \hline
+    alumno/<str:legajo>/inscripciones/ & GET & Bearer  \\ \hline
+    materia/<str:codigo>/alumnos/ & GET & Bearer  \\ \hline
+    \end{tabular}
+    \caption{Métodos para pedir datos. (cc: código de carrera, pa: plan año)}
+    \label{tab:tabla_api}
+\end{table}
+
