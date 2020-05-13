@@ -144,11 +144,211 @@ Docker, nginx, base de datos
 
 \section[Análisis de Datos]{Análisis de Datos}
 
-\subsection{Tecnologías}
+Para poder obtener información relevante de las carreras, materias y alumnos, se debe hacer un análisis de los datos recopilados históricamente.
 
-\subsection{API REST}
+Si bien el núcleo provee una gran cantidad de datos, éstos necesitan una manipulación, procesamiento y una limpieza para que puedan ser analizados.
 
-\subsection{}
+El objetivo principal de este módulo es de la obtención de los datos mediante una API Rest, la manipulación y el procesamiento de esos datos. Una vez terminado este proceso, sirve los resultados mediante una API Rest, que es consumida por un tercero para su visualización.
+
+\subsection{Especificaciones}
+
+El módulo de análisis de datos está construido con Python 3.6. El análisis de los datos se hizo con Pandas y los resultados son servidos gracias a Flask a través de una API REST.
+
+
+El siguiente gráfico muestra el rol de este módulo y su funcionamiento con respecto al núcleo
+>> Gráfico de funcionamiento
+
+\subsection{Obtención de los datos}
+
+Los datos son obtenidos a través de pedidos a la API del Núcleo. Estos datos llegan en forma de JSON y son transformados a DataFrame o Series (estructuras de datos de Pandas). 
+
+Dado que los datos llegan de forma de recursos independientes, la mayor parte de los análisis requieren que estos datos sean unidos gracias a las funcionalidades de los DataFrames (de forma similar a los join de SQL).
+
+\subsection{Análisis}
+
+Una vez terminados los procesos de obtención, limpiado y union de los datos, se empieza el proceso de análisis.
+
+Se realizaron análisis de diferentes magnitudes, basado en la cantidad de procesamiento que requieren. 
+\subsubsection{Análisis sobre materias}
+
+\paragraph{Datos basicos históricos} \mbox{}\\
+URI: /materias/<cod\_materia>/basicos \\
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: codigo de la carrera. \\
+Dada una materia, analiza cuántos aprobaron, cuántos desaprobaron, cuántos quedaron ausentes y cuántos faltan aprobarla dentro de un período de tiempo.
+
+\paragraph{Detalle de aprobación}\mbox{}\\
+URI: /materias/<cod\_materia>/detalle-aprobados \\
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: codigo de la carrera. \\
+Dada una materia, dice el detalle de aprobados. Teniendo en cuenta la forma de aprobación. Las formas de aprobacion son:
+
+>> Formas de aprobación
+
+\paragraph{Dispersión de notas}\mbox{}\\
+
+URI: /materias/<cod\_materia>/dispersion-notas \\
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: codigo de la carrera. \\
+Dada una materia, se hace un análisis de la dispersión de las notas dentro de un período. Teniendo en cuenta alumnos, sus notas y el promedio de ese alumno.
+
+\paragraph{Número de recursantes}\mbox{}\\
+URI: /materias/<cod\_materia>/recursantes \\
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: codigo de la carrera. \\
+Dada una materia, analiza qué alumnos son recursantes y cuantas veces
+
+
+\subsubsection{Análisis sobre alumnos}
+
+\paragraph{Porcentaje de aprobación por área}\mbox{}\\
+
+URI: /alumnos/<legajo>/porcentajes-areas \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Dado un alumno, se hace un análisis de los porcentajes de aprobación que tiene con respecto a las diferentes áreas de la carrera y el plan que se está analizando, dentro del período elegido.
+
+Cada carrera tiene sus propias áreas. En particular, y tomado a forma de ejemplo, las áreas de la Licenciatura en Informática son:
+
+\begin{table}[!htbp]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|}
+    \hline
+    Nombre \\ \hline
+    Programación \\ \hline
+    Sistemas Informáticos \\ \hline
+    Procesos Informáticos\\ \hline
+    Desarrollo de Software \\ \hline
+    Teoría de la Computación \\ \hline
+    \end{tabular}
+    \caption{Áreas de la Licenciatura en Informática}
+    \label{tab:tabla_areas}
+\end{table}
+
+\paragraph{Porcentaje de aprobación por núcleo}\mbox{}\\
+
+URI: /alumnos/<legajo>/porcentajes-nucleos \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Dado un alumno, se hace un análisis de los porcentajes de aprobación que tiene con respecto a los diferentes núcleos de la carrera y el plan que se está analizando, dentro del período elegido.
+
+Cada carrera tiene sus propias núcleos. En particular, y tomado a forma de ejemplo, los núcleos de la Licenciatura en Informática son:
+
+\begin{table}[!htbp]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|}
+    \hline
+    Código & Nombre \\ \hline
+    I & Introductorio \\ \hline
+    B & Básico\\ \hline
+    A & Avanzado \\ \hline
+    C & Complementario/Orientativo \\ \hline
+    \end{tabular}
+    \caption{Núcleos de la Licenciatura en Informática}
+    \label{tab:tabla_nucleos}
+\end{table}
+
+
+\paragraph{Notas}\mbox{}\\
+
+URI: /alumnos/<legajo>/notas \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Dado un alumno, se obtienen las diferentes notas que tuvo a lo largo de sus cursadas.
+
+\paragraph{Porcentaje de avance de carrera}\mbox{}\\
+
+URI: /alumnos/<legajo>/porcentaje-carrera \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Dado un legajo de alumno, se realiza un análisis para determinar el porcentaje de avance de la carrera, según el plan que se analice. Dado que cada plan tiene una cantidad distinta de materias, este dato cambia según el plan que se analice.
+
+\paragraph{Promedio por períodos}\mbox{}\\
+
+URI: /alumnos/<legajo>/scores \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Dado un alumno, se calcula cuál fue su **score** por cada período. Es decir, su rendimiento semestral. 
+
+El **score** se calcula sacando un promedio de sus notas en un semestre. Las materias que sólo se distinguen entre "Aprobado" y "Desaprobado" y no disponen de una nota, se les asigna una nota para sacar este promedio.
+Las materias con nota "Aprobado" son consideradas como un 7, y las materias con nota "Desaprobado" son consideradas como un 3.
+
+Entonces, el **score** no es un promedio preciso, sino una estipulación de lo que fué su rendimiento en ese período.
+
+Este score es útil para analizar el rendimiento de un alumno y puede servirle a las carreras para tomar decisiones tempranas.
+
+\subsubsection{Análisis sobre carreras}
+
+\paragraph{Cantidad de alumnos por semestre}\mbox{}\\
+
+URI: /carreras/<carrera>/alumnos \\
+
+Dada una carrera, se obtiene un listado de cantidad de inscriptos por semestre
+
+
+\paragraph{Datos generales por cohorte}\mbox{}\\
+
+URI: /carreras/<carrera>/cantidades-alumnos \\
+
+Dada una carrera, se obtiene un listado de inscriptos, cursantes, graduados y postulantes por cohorte.
+
+
+\paragraph{Ingresantes por cohorte}\mbox{}\\
+
+URI: /carreras/<carrera>/cantidades-ingresantes \\
+
+Dada una carrera, se obtiene la cantidad de ingresantes separadas por año.
+
+
+\paragraph{Cantidad de cursantes actual}\mbox{}\\
+
+URI: /carreras/<carrera>/cursantes-actual \\
+
+Dada una carrera, se obtiene la cantidad de cursantes actual.
+
+
+\paragraph{Cantidad de ingresantes actual}\mbox{}\\
+
+URI: /carreras/<carrera>/ingresantes-actual \\
+
+Dada una carrera, se obtiene la cantidad de ingresantes.
+
+
+\paragraph{Cantidad total de graduados} \mbox{}\\
+
+URI: /carreras/<carrera>/graduados-total \\
+
+Dada una carrera, se obtiene el total de graduados.
+
+
+\paragraph{Dispersión de scores y promedios}\mbox{}\\
+URI: /carreras/<carrera>/dispersion-score-promedio \\
+
+El objetivo de este análisis es el agrupar alumnos en base al score y al promedio. Mostrando grupos de interés sobre los cuales se podrán implementar acciones específicas.
+
+\paragraph{Materias Traba}\mbox{}\\
+
+URI: /carreras/<carrera>/materias-traba \\
+
+Dada una carrera, se quiere analizar qué materias son las que traban a los alumnos. 
+Para poder realizar este análisis, se necesitaron los siguientes datos:
+\begin{outline}
+\1 Índice de aprobación de una materia (cantidad de aprobados / cantidad total de cursantes).
+\1 Cuántas materias obligatorias dependen de ella.
+\end{outline}
+
+Luego de calcular estos datos materia por materia, se calcula un score. Este score determina qué materia puede llegar a trabar la carrera de un alumno.
+
+\begin{align*}
+  Score = IndiceAprobacion * CantidadObligatoriasDependientes\\
+\end{align*}
+
+Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 materias que son obligatorias y dependen de ésta para ser cursadas, tendrá un score de 7.5 (0.75 * 10).
+
+
 
 \section[Visualización de los datos analizados]{Visualización de los datos analizados}
 
