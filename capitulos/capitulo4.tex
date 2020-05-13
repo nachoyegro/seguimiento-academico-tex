@@ -156,7 +156,13 @@ El módulo de análisis de datos está construido con Python 3.6. El análisis d
 
 
 El siguiente gráfico muestra el rol de este módulo y su funcionamiento con respecto al núcleo
->> Gráfico de funcionamiento
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.8]{images/analisis-datos/analisis-datos.png}
+  \captionof{figure}{Obtención de datos a través del núcleo}
+  \label{fig:django}
+\end{figure}
 
 \subsection{Obtención de los datos}
 
@@ -352,5 +358,88 @@ Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 m
 
 \section[Visualización de los datos analizados]{Visualización de los datos analizados}
 
-\subsection{Tecnologías}
+Si bien los datos ya fueron a analizados, se necesitó una forma de visualizarlos de forma gráfica. Por esta razón se desarrolló una nueva aplicación, la cual tiene tres pantallas principales:
 
+\begin{outline}
+\2 Datos sobre carreras.
+\2 Datos sobre materias.
+\2 Datos sobre alumnos.
+\end{outline}
+
+\subsection{Especificaciones}
+
+El módulo de visualización de datos esta construido con React 16.8 y se usó la libreria recharts para graficar.
+Este módulo realiza pedidos a la aplicación de análisis de datos, los cuales tienen que tener su correspondiente token para ser aceptados.
+Cuando un usuario ingresa, se hace una autenticación con el núcleo. Esta autenticación tiene como resultado un token, y éste será utilizado para realizar todos los pedidos de datos correspondientes.
+
+El siguiente gráfico muestra el rol de este módulo y su funcionamiento con respecto al de análisis de datos y al núcleo.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.8]{images/analisis-datos/analisis-datos.png}
+  \captionof{figure}{Obtención de datos a través del núcleo}
+  \label{fig:django}
+\end{figure}
+
+\subsection{Obtención de los datos}
+
+Los datos son obtenidos a través de pedidos a la API del módulo de análisis de datos. Estos datos llegan como JSON y son procesados para ser mostrados de forma correcta.
+
+\subsection{Visualización de datos}
+
+Hablar de las pantallas principales, hacer referencia a los anexos donde van a estar LOGIN, Home, Form de carrera, form de materia y form de alumno.
+
+\subsubsection{Visualización por carrera}
+
+\paragraph{Cantidad actual de cursantes} \mbox{}\\
+Widget
+
+\paragraph{Cantidad actual de ingresantes} \mbox{}\\
+Widget
+
+\paragraph{Cantidad total de graduados} \mbox{}\\
+Widget
+
+\paragraph{Dispersión de alumnos} \mbox{}\\
+Grafico de dispersión
+
+\paragraph{Cantidad de ingresos por semestre} \mbox{}\\
+Grafico de area
+
+\paragraph{Alumnos por cohorte} \mbox{}\\
+Tabla, CONEAU
+
+\paragraph{Ingresantes por cohorte} \mbox{}\\
+Tabla, CONEAU
+
+
+
+\subsubsection{Visualización por materia}
+
+Hablar del form y hacer referencia al anexo
+
+\paragraph{Estadísticas básicas de materia} \mbox{}\\
+Grafico de barras
+
+\paragraph{Detalle de aprobación} \mbox{}\\
+Grafico de barras
+
+\paragraph{Dispersión de notas con respecto al promedio} \mbox{}\\
+Grafico de dispersion
+
+\subsubsection{Visualización por alumno}
+
+\paragraph{Porcentaje de carrera} \mbox{}\\
+Widget
+
+\paragraph{Porcentajes de aprobación por área} \mbox{}\\
+Radar
+
+\paragraph{Porcentajes de aprobacion por núcleo} \mbox{}\\
+Radar
+
+\paragraph{Detalle de aprobación} \mbox{}\\
+Tabla
+
+\paragraph{Detalle de aprobación} \mbox{}\\
+Gráfico de líneas
