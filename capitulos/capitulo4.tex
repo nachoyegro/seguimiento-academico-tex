@@ -358,7 +358,19 @@ Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 m
 
 \section[Visualización de los datos analizados]{Visualización de los datos analizados}
 
-Si bien los datos ya fueron a analizados, se necesitó una forma de visualizarlos de forma gráfica. Por esta razón se desarrolló una nueva aplicación, la cual tiene tres pantallas principales:
+Si bien los datos ya fueron a analizados, se necesitó una forma de visualizarlos de forma gráfica. Por esta razón surgió la necesidad de crear una nueva aplicación independiente del núcleo y del análisis de datos.
+
+Esta nueva aplicación obtuvo el nombre de Seguimiento Académico, y este es su logo:
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[scale=0.5]{images/seguimiento-academico/seguimiento-academico-blanco.png}
+  \captionof{figure}{Logo de la aplicación de Seguimiento Académico}
+  \label{fig:seguimiento-academico-logo}
+\end{figure}
+
+Su objetivo principal es recolectar los datos analizados y mostrarlos de forma gráfica, dependiendo de los permisos que tenga el usuario que realiza el pedido.
+Estos datos se desprenden del módulo de análisis, y se agrupan de la siguiente manera:
 
 \begin{outline}
 \2 Datos sobre carreras.
@@ -366,9 +378,12 @@ Si bien los datos ya fueron a analizados, se necesitó una forma de visualizarlo
 \2 Datos sobre alumnos.
 \end{outline}
 
+Cada uno de estos grupos de datos tiene su propia pantalla de tipo reporte, donde el usuario ingresa los parámetros necesarios para cada reporte.
+
+
 \subsection{Especificaciones}
 
-El módulo de visualización de datos esta construido con React 16.8 y se usó la libreria recharts para graficar.
+Seguimiento Académico esta construido con React 16.8 y se usó la libreria recharts para generar gráficos. Además, se uso el framework Material UI para el renderizado de elementos de la interfáz de usuario y diferentes tablas.
 Este módulo realiza pedidos a la aplicación de análisis de datos, los cuales tienen que tener su correspondiente token para ser aceptados.
 Cuando un usuario ingresa, se hace una autenticación con el núcleo. Esta autenticación tiene como resultado un token, y éste será utilizado para realizar todos los pedidos de datos correspondientes.
 
@@ -376,16 +391,27 @@ El siguiente gráfico muestra el rol de este módulo y su funcionamiento con res
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[scale=0.8]{images/analisis-datos/analisis-datos.png}
+    \includegraphics[scale=0.8]{images/seguimiento-academico/flow-seguimiento-academico.png}
   \captionof{figure}{Obtención de datos a través del núcleo}
-  \label{fig:django}
+  \label{fig:analisis-datos}
 \end{figure}
 
 \subsection{Obtención de los datos}
 
 Los datos son obtenidos a través de pedidos a la API del módulo de análisis de datos. Estos datos llegan como JSON y son procesados para ser mostrados de forma correcta.
 
+
 \subsection{Visualización de datos}
+
+La aplicación Seguimiento Académico tiene 5 pantallas principales:
+\begin{outline}
+ \1 Login ().
+ \1 Home ()
+ \1 Reporte de Carrera ()
+ \1 Reporte de Materia ()
+ \1 Reporte de Alumno ()
+\end{outline}
+
 
 Hablar de las pantallas principales, hacer referencia a los anexos donde van a estar LOGIN, Home, Form de carrera, form de materia y form de alumno.
 
@@ -394,24 +420,72 @@ Hablar de las pantallas principales, hacer referencia a los anexos donde van a e
 \paragraph{Cantidad actual de cursantes} \mbox{}\\
 Widget
 
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-cursantes.png}
+  \captionof{figure}{Cantidad de cursantes}
+  \label{fig:sa-cursantes}
+\end{figure}
+
 \paragraph{Cantidad actual de ingresantes} \mbox{}\\
 Widget
+
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresantes.png}
+  \captionof{figure}{Cantidad de ingresantes}
+  \label{fig:sa-ingresantes}
+\end{figure}
 
 \paragraph{Cantidad total de graduados} \mbox{}\\
 Widget
 
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-graduados.png}
+  \captionof{figure}{Cantidad de graduados}
+  \label{fig:sa-graduados}
+\end{figure}
+
 \paragraph{Dispersión de alumnos} \mbox{}\\
 Grafico de dispersión
+
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-dispersion.png}
+  \captionof{figure}{Gráfico de dispersión}
+  \label{fig:sa-dispersion}
+\end{figure}
 
 \paragraph{Cantidad de ingresos por semestre} \mbox{}\\
 Grafico de area
 
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresossemestre.png}
+  \captionof{figure}{Ingresos por semestre}
+  \label{fig:sa-ingresos-semestre}
+\end{figure}
+
 \paragraph{Alumnos por cohorte} \mbox{}\\
 Tabla, CONEAU
+
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-alumnos-cohorte.png}
+  \captionof{figure}{Tabla de alumnos por cohorte}
+  \label{fig:sa-alumnos-cohorte}
+\end{figure}
 
 \paragraph{Ingresantes por cohorte} \mbox{}\\
 Tabla, CONEAU
 
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresantes-cohorte.png}
+  \captionof{figure}{Tabla de ingresantes por cohorte}
+  \label{fig:sa-ingresantes-cohorte}
+\end{figure}
 
 
 \subsubsection{Visualización por materia}
@@ -421,8 +495,22 @@ Hablar del form y hacer referencia al anexo
 \paragraph{Estadísticas básicas de materia} \mbox{}\\
 Grafico de barras
 
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-datosbasicos.png}
+  \captionof{figure}{Estadísticas básicas de la materia}
+  \label{fig:sa-datos-basico}
+\end{figure}
+
 \paragraph{Detalle de aprobación} \mbox{}\\
 Grafico de barras
+
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-detalleaprobacion.png}
+  \captionof{figure}{Detalle de aprobación de la materia}
+  \label{fig:sa-detalle-aprobacion}
+\end{figure}
 
 \paragraph{Dispersión de notas con respecto al promedio} \mbox{}\\
 Grafico de dispersion
@@ -435,8 +523,22 @@ Widget
 \paragraph{Porcentajes de aprobación por área} \mbox{}\\
 Radar
 
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-porcentajesarea.png}
+  \captionof{figure}{Porcentajes de aprobación por área}
+  \label{fig:sa-porcentaje-area}
+\end{figure}
+
 \paragraph{Porcentajes de aprobacion por núcleo} \mbox{}\\
 Radar
+
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-porcentajesnucleo.png}
+  \captionof{figure}{Porcentajes de aprobación por núcleo}
+  \label{fig:sa-porcentaje-nucleo}
+\end{figure}
 
 \paragraph{Detalle de aprobación} \mbox{}\\
 Tabla
