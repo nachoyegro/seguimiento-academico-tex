@@ -349,10 +349,10 @@ Para poder realizar este análisis, se necesitaron los siguientes datos:
 Luego de calcular estos datos materia por materia, se calcula un score. Este score determina qué materia puede llegar a trabar la carrera de un alumno.
 
 \begin{align*}
-  Score = IndiceAprobacion * CantidadObligatoriasDependientes\\
+  Score = (1 - IndiceAprobacion) * CantidadObligatoriasDependientes\\
 \end{align*}
 
-Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 materias que son obligatorias y dependen de ésta para ser cursadas, tendrá un score de 7.5 (0.75 * 10).
+Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 materias que son obligatorias y dependen de ésta para ser cursadas, tendrá un score de 2.5 ((1 - 0.75) * 10).
 
 
 
@@ -405,20 +405,19 @@ Los datos son obtenidos a través de pedidos a la API del módulo de análisis d
 
 La aplicación Seguimiento Académico tiene 5 pantallas principales:
 \begin{outline}
- \1 Login ().
- \1 Home ()
- \1 Reporte de Carrera ()
- \1 Reporte de Materia ()
- \1 Reporte de Alumno ()
+ \1 Login (figura ~\ref{fig:sa-login}).
+ \1 Home (figura ~\ref{fig:sa-home})
+ \1 Reporte de Carrera (figura ~\ref{fig:sa-carrera})
+ \1 Reporte de Materia (figura ~\ref{fig:sa-materia})
+ \1 Reporte de Alumno (figura ~\ref{fig:sa-alumno})
 \end{outline}
-
-
-Hablar de las pantallas principales, hacer referencia a los anexos donde van a estar LOGIN, Home, Form de carrera, form de materia y form de alumno.
 
 \subsubsection{Visualización por carrera}
 
+Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles. Una vez que el formulario fue completado, se muestran los siguientes gráficos.
+
 \paragraph{Cantidad actual de cursantes} \mbox{}\\
-Widget
+La cantidad actual de cursantes de la carrera se muestra en forma de tarjeta informativa.
 
 \begin{figure}[!htbp]
   \centering
@@ -428,7 +427,7 @@ Widget
 \end{figure}
 
 \paragraph{Cantidad actual de ingresantes} \mbox{}\\
-Widget
+La cantidad actual de ingresantes de la carrera se muestra en forma de tarjeta informativa.
 
 \begin{figure}[!htbp]
   \centering
@@ -438,7 +437,7 @@ Widget
 \end{figure}
 
 \paragraph{Cantidad total de graduados} \mbox{}\\
-Widget
+La cantidad total de graduados de la carrera se muestra en forma de tarjeta informativa.
 
 \begin{figure}[!htbp]
   \centering
@@ -448,7 +447,7 @@ Widget
 \end{figure}
 
 \paragraph{Dispersión de alumnos} \mbox{}\\
-Grafico de dispersión
+El siguiente gráfico muestra la dispersión de los alumnos con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los alumnos que se desempeñaron por encima de su historial y cuáles no.
 
 \begin{figure}[!htbp]
   \centering
@@ -458,7 +457,7 @@ Grafico de dispersión
 \end{figure}
 
 \paragraph{Cantidad de ingresos por semestre} \mbox{}\\
-Grafico de area
+El siguiente gráfico es en forma de área, y muestra la cantidad de ingresos semestrales histórico de la carrera. De esta forma, se puede observar en qué momento hubo picos de ingresos y en qué momentos hubo menos.
 
 \begin{figure}[!htbp]
   \centering
@@ -468,7 +467,7 @@ Grafico de area
 \end{figure}
 
 \paragraph{Alumnos por cohorte} \mbox{}\\
-Tabla, CONEAU
+La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de cursantes hubo, la cantidad de ingresantes y la cantidad de graduados.
 
 \begin{figure}[!htbp]
   \centering
@@ -478,7 +477,7 @@ Tabla, CONEAU
 \end{figure}
 
 \paragraph{Ingresantes por cohorte} \mbox{}\\
-Tabla, CONEAU
+La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de ingresantes hubo.
 
 \begin{figure}[!htbp]
   \centering
@@ -487,13 +486,25 @@ Tabla, CONEAU
   \label{fig:sa-ingresantes-cohorte}
 \end{figure}
 
+\paragraph{Materias traba} \mbox{}\\
+La siguiente tabla muestra un puntaje por materia en base a su porcentaje de aprobación y sobre la dependencia que tienen otras materias sobre ésta para ser cursadas.
+
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-materias-traba.png}
+  \captionof{figure}{Tabla de ingresantes por cohorte}
+  \label{fig:sa-materias-traba}
+\end{figure}
+
 
 \subsubsection{Visualización por materia}
 
-Hablar del form y hacer referencia al anexo
+Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles, luego ingresa el código de materia a analizar y una fecha de inicio y fin. De esta forma se analizará solo en el rango de fechas que se eligió.
+
+Una vez que el formulario fue completado, se muestran los siguientes gráficos.
 
 \paragraph{Estadísticas básicas de materia} \mbox{}\\
-Grafico de barras
+El siguiente gráfico muestra en forma de columnas los resultados de los alumnos en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla.
 
 \begin{figure}[!htbp]
   \centering
@@ -503,7 +514,7 @@ Grafico de barras
 \end{figure}
 
 \paragraph{Detalle de aprobación} \mbox{}\\
-Grafico de barras
+El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los alumnos esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un exámen equivalente, cuántos con una equivalencia equivalente y cuántos con exámen.
 
 \begin{figure}[!htbp]
   \centering
@@ -513,15 +524,27 @@ Grafico de barras
 \end{figure}
 
 \paragraph{Dispersión de notas con respecto al promedio} \mbox{}\\
-Grafico de dispersion
+Este gráfico muestra en forma de dispersión como les fue a los alumnos con respecto a su promedio.
 
 \subsubsection{Visualización por alumno}
+Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles, luego ingresa el legajo del alumno a analizar, un plan de estudios, y una fecha de inicio y fin. De esta forma se analizará solo en el rango de fechas que se eligió.
+
+Una vez que el formulario fue completado, se muestran los siguientes gráficos.
+
+\paragraph{Desempeño del alumno} \mbox{}\\
+El siguiente gráfico muestra el desempeño del alumno semestralmente dentro del rango seleccionado.
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-desempeño.png}
+  \captionof{figure}{Detalle de aprobación}
+  \label{fig:sa-detalle-aprobacion}
+\end{figure}
 
 \paragraph{Porcentaje de carrera} \mbox{}\\
-Widget
+Se muestra el porcentaje de aprobación de la carrera en forma de tarjeta informativa.
 
 \paragraph{Porcentajes de aprobación por área} \mbox{}\\
-Radar
+El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno dentro de las áreas de la carrera.
 
 \begin{figure}[!htbp]
   \centering
@@ -531,7 +554,7 @@ Radar
 \end{figure}
 
 \paragraph{Porcentajes de aprobacion por núcleo} \mbox{}\\
-Radar
+El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno dentro de los núcleos de la carrera.
 
 \begin{figure}[!htbp]
   \centering
@@ -540,8 +563,12 @@ Radar
   \label{fig:sa-porcentaje-nucleo}
 \end{figure}
 
-\paragraph{Detalle de aprobación} \mbox{}\\
-Tabla
+\paragraph{Notas} \mbox{}\\
+La siguiente tabla muestra las notas del alumno dentro del rango seleccionado
 
-\paragraph{Detalle de aprobación} \mbox{}\\
-Gráfico de líneas
+\begin{figure}[!htbp]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-notas.png}
+  \captionof{figure}{Notas del alumno}
+  \label{fig:sa-notas}
+\end{figure}
