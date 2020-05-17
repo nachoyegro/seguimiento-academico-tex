@@ -6,10 +6,14 @@
 \subsection[Resultados esperados]{Resultados esperados}
 
 Se espera con este desarrollo tener un sistema capaz de brindarle datos a todos los interesados. Para que esto se cumpla, la implementación tiene que ser capaz de manejar todos los pedidos que recibe y responder en consecuencia. 
+
 Si bien la problemática inicial implica que sólo se consultarán datos para analizarlos y ser visualizados por los directores de las carreras de la Universidad Nacional de Quilmes, no hay que descartar que pueda ser extendido dado su potencial.
+
 Para garantizar que todo funcione de manera correcta se realizaron diferentes pruebas con escenarios cambiantes.
-Para todas las pruebas se usaron los mismos URIs y se realizaron sobre una base de datos con 1.424 alumnos y 13.234 materias cursadas por estos alumnos.
+Para todas las pruebas se eligieron 5 URIs y se realizaron sobre una base de datos con 1.424 alumnos y 13.234 materias cursadas por estos alumnos.
 La arquitectura utilizada para las pruebas se asemeja a la que dispondrá a la hora de la implementación.
+
+Se utilizó la herramienta jMeter para realizar los requests y evaluar los tiempos de respuesta y errores, entre otras métricas.
 
 Para medir los tiempos de respuesta, se usará APDEX.
 
@@ -28,6 +32,12 @@ Esta prueba duró 5 minutos y los resultados se muestran a continuación.
 
 
 \subsubsection{Resultados generales de la prueba}
+
+
+Los resultados generales, como muestra la tabla ~\ref{tab:100u_5m_gen}, indican que durante los 5 minutos que duró la prueba se realizaron 16.997 requests en total, y el núcleo pudo responder sin ningún error.
+
+El tiempo promedio de respuesta fue de 1043.79ms.
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -43,10 +53,16 @@ Esta prueba duró 5 minutos y los resultados se muestran a continuación.
     
     \end{tabular}
     \caption{Pruebas realizadas con 100 usuarios simultáneos durante 5 minutos}
-    \label{tab:tabla_planes}
+    \label{tab:100u_5m_gen}
 \end{table}
 
-\subsubsection{Resultados sobre el uso de recursos durate la prueba}
+
+\subsubsection{Resultados sobre el uso de recursos durante la prueba}
+
+Para evaluar el consumo de recursos, se utilizó el comando \textit{docker stats} que realiza una transmisión en vivo de los recursos que van consumiendo los contenedores.
+En promedio utilizó un 68\% del CPU y 55MB de memoria RAM (tabla ~\ref{tab:100u_5m_rec}).
+
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -56,13 +72,20 @@ Esta prueba duró 5 minutos y los resultados se muestran a continuación.
     Núcleo & 68\% & 55 \\ \hline
     \end{tabular}
     \caption{Recursos en promedio consumidos por el contenedor durante la prueba}
-    \label{tab:tabla_planes}
+    \label{tab:100u_5m_rec}
 \end{table}
-
-En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
 
 
 \subsubsection{APDEX de la prueba}
+
+Para determinar el APDEX de la prueba, se estableció que la \textit{tolerancia} es de 2 segundos, y la \textit{frustración} es de 3 segundos. 
+
+Como se explicó anteriormente, esta prueba tiene en cuenta el tiempo que tardan todos los requests para luego determinar este valor.
+
+Para esta prueba, el APDEX fue de 0.995, lo cual es casi perfecto (el valor máximo es 1) dentro de los parámetros elegidos.
+
+La tabla ~\ref{tab:100u_5m_apdex} muestra este resultado.
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -72,7 +95,7 @@ En promedio utilizó un 68\% del CPU y 55MB de memoria RAM.
     0.995 & 2 seg & 3 seg \\ \hline
     \end{tabular}
     \caption{APDEX de la prueba con 100 usuarios durante 5 minutos}
-    \label{tab:tabla_planes}
+    \label{tab:100u_5m_apdex}
 \end{table}
 
 \break
@@ -82,6 +105,13 @@ Luego de la primer prueba, se realizó una segunda en la cual 300 usuarios simul
 Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 
 \subsubsection{Resultados generales de la prueba}
+
+Al igual que en la prueba anterior, jMeter nos muestra estos resultados (~\ref{tab:300u_10m_gen}).
+
+Con un total de 20918 pedidos, el núcleo no pudo resolver en promedio un 1.37\% de los requests dando como resultado el error HTTP 502.
+
+El tiempo promedio de respuesta fue de 4409.80ms., lo cual significa un incremento considerable.
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -96,12 +126,15 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     Plan | Cantidad materias necesarias & 4122 & 1.50\% & 4420.89\\ \hline
     \end{tabular}
     \caption{Pruebas realizadas con 300 usuarios simultáneos durante 10 minutos}
-    \label{tab:tabla_planes}
+    \label{tab:300u_10m_gen}
 \end{table}
 
 
 
 \subsubsection{Resultados sobre el uso de recursos durante la prueba}
+
+Como muestra la tabla ~\ref{tab:300u_10m_rec}, hubo un incremento del uso promedio de CPU, aunque el uso de memoria se mantuvo igual.
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -111,10 +144,15 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     Núcleo & 88\% & 55 \\ \hline
     \end{tabular}
     \caption{Recursos en promedio consumidos por el contenedor durante la prueba}
-    \label{tab:tabla_planes}
+    \label{tab:300u_10m_rec}
 \end{table}
 
 \subsubsection{APDEX de la prueba}
+
+Luego de ver el tiempo promedio de respuesta de los requests, es esperable que el APDEX baje considerablemente.
+
+En este caso fue de 0.361 (tabla~\ref{tab:300u_10m_apdex}), lo que significa que esa magnitud de usuarios haciendo pedidos no genera conformidad dentro de los parámetros establecidos para la satisfacción de los usuarios.
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -124,15 +162,22 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     0.361 & 2 seg & 3 seg \\ \hline
     \end{tabular}
     \caption{APDEX de la prueba con 300 usuarios durante 10 minutos y una instancia de la aplicación}
-    \label{tab:tabla_planes}
+    \label{tab:300u_10m_apdex}
 \end{table}
 
 
 \subsection{Pruebas con 300 usuarios simultáneos con dos instancias}
-Luego de la prueba anterior, donde se refleja una baja considerable del tiempo de respuesta al recibir esa magnitud de usuarios simultáneos, se realizó la misma prueba haciendo uso del balanceador de carga y agregando otra instancia de docker.
+Luego de la prueba anterior, donde se refleja una baja considerable del tiempo de respuesta al recibir esa magnitud de usuarios simultáneos, se realizó la misma prueba haciendo uso del balanceador de carga que provee nginx y agregando otra instancia de docker.
 Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 
 \subsubsection{Resultados generales de la prueba}
+
+Al igual que en las pruebas anteriores, se tuvo en cuenta los resultados provistos por jMeter (tabla~\ref{tab:300u_10m_2i_gen}).
+
+Estos resultados muestran un incremento en la cantidad de pedidos que pudo resolver el núcleo, pasando de los 20.918 pedidos a 33.499.
+
+Estos resultados también muestran una mejora en el tiempo promedio de respuesta, bajando de 4409.80ms a 2796.50ms. Además, muestran una baja en el promedio de errores pasando de 1.37\% a 0.02\%.
+
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -147,12 +192,16 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     Plan | Cantidad materias necesarias & 6640 & 0.00\% & 2700.69\\ \hline
     \end{tabular}
     \caption{Pruebas realizadas con 300 usuarios simultáneos durante 10 minutos}
-    \label{tab:tabla_planes}
+    \label{tab:300u_10m_2i_gen}
 \end{table}
 
 
 
-\subsubsection{Resultados sobre el uso de recursos durate la prueba}
+\subsubsection{Resultados sobre el uso de recursos durante la prueba}
+
+La tabla~\ref{tab:300u_10m_2i_rec} muestra que el consumo de cpu por instancia bajó de 88\% a 67\% y 68\% para cada una de las respectivas instancias. 
+
+El consumo de memoria se mantuvo en los mismos parámetros, aunque al ser dos instancias esto se duplicó. Igualmente, son valores bajos con respecto a la arquitectura provista.
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -163,7 +212,7 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     Núcleo-2 & 68\% & 54 \\ \hline
     \end{tabular}
     \caption{Recursos en promedio consumidos por los contenedores durante la prueba}
-    \label{tab:tabla_planes}
+    \label{tab:300u_10m_2i_rec}
 \end{table}
 \subsubsection{APDEX de la prueba}
 \begin{table}[!htbp]
@@ -175,7 +224,7 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
     0.667 & 2 seg & 3 seg \\ \hline
     \end{tabular}
     \caption{APDEX de la prueba con 300 usuarios durante 10 minutos y dos instancias de la aplicación}
-    \label{tab:tabla_planes}
+    \label{tab:300u_10m_2i_apdex}
 \end{table}
 \break
 \section{Conclusiones sobre las pruebas}

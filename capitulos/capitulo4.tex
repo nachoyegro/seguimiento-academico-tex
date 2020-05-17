@@ -357,9 +357,9 @@ Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 m
 
 \section[Visualización de los datos analizados]{Visualización de los datos analizados}
 
-Si bien los datos ya fueron a analizados, se necesitó una forma de visualizarlos de forma gráfica. Por esta razón surgió la necesidad de crear una nueva aplicación independiente del núcleo y del análisis de datos.
+Si bien la parte de análisis de datos quedó cubierta, se necesitó una forma de visualizarlos de forma gráfica. Por esta razón surgió la necesidad de crear una nueva aplicación independiente del núcleo y del análisis de datos.
 
-Esta nueva aplicación obtuvo el nombre de Seguimiento Académico, y este es su logo:
+Esta nueva aplicación obtuvo el nombre de Seguimiento Académico, y su logo se muestra en la figura ~\ref{fig:seguimiento-academico-logo}.
 
 \begin{figure}[h!]
   \centering
@@ -386,7 +386,7 @@ Seguimiento Académico esta construido con React 16.8 y se usó la libreria rech
 Este módulo realiza pedidos a la aplicación de análisis de datos, los cuales tienen que tener su correspondiente token para ser aceptados.
 Cuando un usuario ingresa, se hace una autenticación con el núcleo. Esta autenticación tiene como resultado un token, y éste será utilizado para realizar todos los pedidos de datos correspondientes.
 
-El siguiente gráfico muestra el rol de este módulo y su funcionamiento con respecto al de análisis de datos y al núcleo.
+El gráfico ~\ref{fig:analisis-datos} muestra el rol de este módulo y su funcionamiento con respecto al de análisis de datos y al núcleo.
 
 \begin{figure}[H]
   \centering
@@ -397,7 +397,12 @@ El siguiente gráfico muestra el rol de este módulo y su funcionamiento con res
 
 \subsection{Obtención de los datos}
 
-Los datos son obtenidos a través de pedidos a la API del módulo de análisis de datos. Estos datos llegan como JSON y son procesados para ser mostrados de forma correcta.
+Los datos son obtenidos a través de pedidos a la API del módulo de análisis de datos gracias a Axios.
+Axios está basado en \textit{promises}, con lo cual se puede aprovechar las ventajas de \textit{async} y \textit{await} para un código asincrónico más legible.
+
+Estos pedidos se realizan a través de llamadas \textit{ajax}, lo cual quiere decir que la página carga normalmente y realiza los pedidos de forma asincrónica e independiente entre los gráficos. A medida que los datos van llegando, cada gráfico se va \textit{renderizando}.
+
+Estos datos llegan como JSON y son procesados para ser mostrados de forma correcta.
 
 
 \subsection{Visualización de datos}
@@ -416,7 +421,7 @@ La aplicación Seguimiento Académico tiene 5 pantallas principales:
 Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles. Una vez que el formulario fue completado, se muestran los siguientes gráficos.
 
 \paragraph{Cantidad actual de cursantes} \mbox{}\\
-La cantidad actual de cursantes de la carrera se muestra en forma de tarjeta informativa.
+La cantidad actual de cursantes de la carrera se muestra en forma de tarjeta informativa (figura~\ref{fig:sa-cursantes}). 
 
 \begin{figure}[H]
   \centering
@@ -426,7 +431,7 @@ La cantidad actual de cursantes de la carrera se muestra en forma de tarjeta inf
 \end{figure}
 
 \paragraph{Cantidad actual de ingresantes} \mbox{}\\
-La cantidad actual de ingresantes de la carrera se muestra en forma de tarjeta informativa.
+La cantidad actual de ingresantes de la carrera se muestra en forma de tarjeta informativa (figura~\ref{fig:sa-ingresantes}).
 
 \begin{figure}[H]
   \centering
@@ -436,7 +441,7 @@ La cantidad actual de ingresantes de la carrera se muestra en forma de tarjeta i
 \end{figure}
 
 \paragraph{Cantidad total de graduados} \mbox{}\\
-La cantidad total de graduados de la carrera se muestra en forma de tarjeta informativa.
+La cantidad total de graduados de la carrera se muestra en forma de tarjeta informativa (figura~\ref{fig:sa-graduados}).
 
 \begin{figure}[H]
   \centering
@@ -446,7 +451,7 @@ La cantidad total de graduados de la carrera se muestra en forma de tarjeta info
 \end{figure}
 
 \paragraph{Dispersión de alumnos} \mbox{}\\
-El siguiente gráfico muestra la dispersión de los alumnos con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los alumnos que se desempeñaron por encima de su historial y cuáles no.
+El siguiente gráfico muestra la dispersión de los alumnos con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los alumnos que se desempeñaron por encima de su historial y cuáles no (figura~\ref{fig:sa-dispersion}).
 
 \begin{figure}[H]
   \centering
@@ -456,7 +461,7 @@ El siguiente gráfico muestra la dispersión de los alumnos con respecto a su pr
 \end{figure}
 
 \paragraph{Cantidad de ingresos por semestre} \mbox{}\\
-El siguiente gráfico es en forma de área, y muestra la cantidad de ingresos semestrales histórico de la carrera. De esta forma, se puede observar en qué momento hubo picos de ingresos y en qué momentos hubo menos.
+El siguiente gráfico es en forma de \textit{área}, y muestra la cantidad de ingresos semestrales histórico de la carrera. De esta forma, se puede observar en qué momento hubo picos de ingresos y en qué momentos hubo menos (figura~\ref{fig:sa-ingresos-semestre}).
 
 \begin{figure}[H]
   \centering
@@ -466,7 +471,7 @@ El siguiente gráfico es en forma de área, y muestra la cantidad de ingresos se
 \end{figure}
 
 \paragraph{Alumnos por cohorte} \mbox{}\\
-La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de cursantes hubo, la cantidad de ingresantes y la cantidad de graduados.
+La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de cursantes hubo, la cantidad de ingresantes y la cantidad de graduados  (figura~\ref{fig:sa-alumnos-cohorte}).
 
 \begin{figure}[H]
   \centering
@@ -476,7 +481,7 @@ La siguiente es una tabla que detalla año a año de la carrera, qué cantidad d
 \end{figure}
 
 \paragraph{Ingresantes por cohorte} \mbox{}\\
-La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de ingresantes hubo.
+La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de ingresantes hubo  (figura~\ref{fig:sa-ingresantes-cohorte}).
 
 \begin{figure}[H]
   \centering
@@ -486,7 +491,7 @@ La siguiente es una tabla que detalla año a año de la carrera, qué cantidad d
 \end{figure}
 
 \paragraph{Materias traba} \mbox{}\\
-La siguiente tabla muestra un puntaje por materia en base a su porcentaje de aprobación y sobre la dependencia que tienen otras materias sobre ésta para ser cursadas.
+La siguiente tabla muestra un puntaje por materia en base a su porcentaje de aprobación y sobre la dependencia que tienen otras materias sobre ésta para ser cursadas  (figura~\ref{fig:sa-materias-traba}).
 
 \begin{figure}[H]
   \centering
@@ -503,7 +508,7 @@ Se dispone de un formulario para realizar un reporte, donde el usuario puede sel
 Una vez que el formulario fue completado, se muestran los siguientes gráficos.
 
 \paragraph{Estadísticas básicas de materia} \mbox{}\\
-El siguiente gráfico muestra en forma de columnas los resultados de los alumnos en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla.
+El siguiente gráfico muestra en forma de columnas los resultados de los alumnos en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla  (figura~\ref{fig:sa-datos-basico}).
 
 \begin{figure}[H]
   \centering
@@ -513,7 +518,7 @@ El siguiente gráfico muestra en forma de columnas los resultados de los alumnos
 \end{figure}
 
 \paragraph{Detalle de aprobación} \mbox{}\\
-El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los alumnos esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un exámen equivalente, cuántos con una equivalencia equivalente y cuántos con exámen.
+El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los alumnos esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un exámen equivalente, cuántos con una equivalencia equivalente y cuántos con exámen  (figura~\ref{fig:sa-detalle-aprobacion}).
 
 \begin{figure}[H]
   \centering
@@ -531,7 +536,7 @@ Se dispone de un formulario para realizar un reporte, donde el usuario puede sel
 Una vez que el formulario fue completado, se muestran los siguientes gráficos.
 
 \paragraph{Desempeño del alumno} \mbox{}\\
-El siguiente gráfico muestra el desempeño del alumno semestralmente dentro del rango seleccionado.
+El siguiente gráfico muestra el desempeño del alumno semestralmente dentro del rango seleccionado  (figura~\ref{fig:sa-detalle-aprobacion}).
 \begin{figure}[H]
   \centering
     \includegraphics[scale=0.4]{images/seguimiento-academico/sa-desempeño.png}
@@ -543,7 +548,7 @@ El siguiente gráfico muestra el desempeño del alumno semestralmente dentro del
 Se muestra el porcentaje de aprobación de la carrera en forma de tarjeta informativa.
 
 \paragraph{Porcentajes de aprobación por área} \mbox{}\\
-El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno dentro de las áreas de la carrera.
+El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno dentro de las áreas de la carrera (figura~\ref{fig:sa-porcentaje-area}).
 
 \begin{figure}[H]
   \centering
@@ -553,7 +558,7 @@ El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno
 \end{figure}
 
 \paragraph{Porcentajes de aprobacion por núcleo} \mbox{}\\
-El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno dentro de los núcleos de la carrera.
+El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno dentro de los núcleos de la carrera (figura~\ref{fig:sa-porcentaje-nucleo}).
 
 \begin{figure}[H]
   \centering
@@ -563,7 +568,7 @@ El siguiente gráfico de radar muestra los porcentajes de aprobación del alumno
 \end{figure}
 
 \paragraph{Notas} \mbox{}\\
-La siguiente tabla muestra las notas del alumno dentro del rango seleccionado
+La siguiente tabla muestra las notas del alumno dentro del rango seleccionado (figura~\ref{fig:sa-notas}).
 
 \begin{figure}[H]
   \centering
