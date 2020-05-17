@@ -1,6 +1,10 @@
 \chapter{Desarrollo de la Solución}
 \label{sec:desarrollo}
 
+Para el proceso de desarrollo se utilizó git como control de versiones del código y GitHub como repositorio del mismo. Además de usar GitHub como repositorio de código, se utilizó la herramienta de \textit{issues} para poder tener una mejor trazabilidad del código.
+
+También se utilizó Travis para tener un entorno de integración continua. Esto significa que a medida que el desarrollo iba creciendo, esta herramienta se encargó de \textit{buildear} el código y correr los tests.  
+
 \section[Núcleo]{Núcleo}
 
 El núcleo se encarga de administrar los datos no sensibles de los alumnos y sus materias cursadas, las inscripciones, planes de estudio con sus créditos, recorrido obligatorio y recomendado de inscripciones, entre otros.
@@ -118,7 +122,10 @@ El resultado tendrá la siguiente forma:
 ]
 \end{minted}
 
-\begin{figure}[h!]
+La figura~\ref{fig:nucleo-jwt} muestra al núcleo y un servicio que intenta hacer pedidos. Primero deberá enviar un pedido con sus credenciales para luego obtener un jwt. 
+Una vez obtenido el jwt, puede hacer pedidos normalmente con el token en el header de cada request.
+
+\begin{figure}[H]
   \centering
     \includegraphics[scale=0.8]{images/nucleo/jwt.png}
   \captionof{figure}{Funcionamiento del pedido de token y posteriores requests}
@@ -128,7 +135,56 @@ El resultado tendrá la siguiente forma:
 
 \subsection{Deploy}
 
-Docker, nginx, base de datos
+Para desplegar el núcleo se usa la siguiente configuración de docker-compose. Adicionalmente, se probaron configuraciones donde se disponen de varias instancias del núcleo limitando la cantidad de CPU y memoria de la que dispone cada uno. 
+
+Esta es la configuración para una sola instancia, sin límite de CPU ni memoria.
+
+
+\begin{minted}[gobble=4,frame=single,linenos]{yaml}
+    
+    # Se usa el formato 2.3 de docker-compose
+    version: '2.3'
+    # Defino los servicios a utilizar
+    services:
+      # En este caso, se muestra con una sola instancia
+      nucleo-academico_1:
+        # Defino el nombre del contenedor
+        container_name: nucleo-academico_1
+        # Siempre debe reiniciarse
+        restart: always
+        # El contexto de build es el directorio actual
+        build: .
+        # Defino el comando para iniciar la aplicación
+        command: gunicorn -w 1 -b :8001 alumnos.wsgi:application
+        # Defino los volúmenes
+        volumes:
+          - .:/code
+        # Esta instancia va a estar corriendo en el puerto 8001
+        ports:
+          - "8001:8001"
+        # Defino el archivo de configuraciones del entorno
+        env_file:
+          - ./.env
+      # Pongo a nginx como otro servicio
+      nginx:
+        # Seteo el nombre del contenedor
+        container_name: nginx-container
+        restart: always
+        build: ./nginx
+        # Nginx va a correr en el puerto 8000 dentro del contenedor 
+        # y hago un mapeo al 80 local
+        ports:
+          - "8000:80"
+        # Le informo que va a depender del nucleo-academico_1
+        depends_on:
+          - nucleo-academico_1
+    
+    # Defino las networks, que serviran para conectar los contenedores
+    networks:
+      default:
+        external:
+          name: seguimiento-academico
+  \end{minted}
 
 \section[Análisis de Datos]{Análisis de Datos}
 
