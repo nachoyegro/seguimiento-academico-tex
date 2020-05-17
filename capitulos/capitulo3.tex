@@ -35,7 +35,7 @@ Siendo tan flexible, provee un fácil uso de la interfáz socket, además de lib
 Django es un framework de desarrollo web de código abierto, que respeta el patrón de diseño MVC (Modelo Vista Controlador). Fue diseñado como un framework del lado del servidor, que opera con bases de datos relacionales. Sin embargo, a lo largo de los años se fue adaptando a las necesidades y puede operar con bases de datos no relacionales (a través de paquetes de terceros).
 
 El contenido en los proyectos de Django trabaja en 3 grandes bloques: urls, templates y apps. Se definen de forma separada y se conectan para cumplir con la entrega de contenido, que es parte de los principios de arquitectura poco acoplada que promueve Django.
-Las URLs definen puntos de entrada de acceso al contenido. Los templates definen los puntos de salida que dan forma al contenido final. En el medio, las apps sirven como *middleware* entre las urls y los templates, agregando contenido desde una base de datos o la interacción de un usuario. 
+Las URLs definen puntos de entrada de acceso al contenido. Los templates definen los puntos de salida que dan forma al contenido final. En el medio, las apps sirven como \textit{middleware} entre las urls y los templates, agregando contenido desde una base de datos o la interacción de un usuario. 
 Para servir código estático, solo se necesitan crear y configurar urls y templates. Para contenido dinámico, se necesitan crear y configurar apps.
 
 \begin{figure}[h!]
@@ -45,28 +45,31 @@ Para servir código estático, solo se necesitan crear y configurar urls y templ
   \label{fig:django}
 \end{figure}
 
-Como se puede ver en la figura, hay dos flujos de información. Uno para enviar información estática, y el otro para enviar información dinámica.
+La figura ~\ref{fig:django} muestra dos flujos de información. Uno para enviar información estática, y el otro para enviar información dinámica.
 
 \section[Flask]{Flask}
 
-Flask es un framework chico para casi cualquier estándar. Suficientemente chico para que sea llamado "micro-framework"\cite{Fsck}. Pero ser chico no significa que hace menos que otros frameworks, sino que fue diseñado para ser extensible desde los cimientos. Provee un núcleo sólido con los servicios básicos, mientras el resto puede ser provisto por extensiones. El hecho de que permita elegir y poner la extensión que se desee, hace que se termine usando un framework que no tiene funcionalidades de más y sirve para exactamente lo que se necesite.
+Flask es un framework chico con respecto a los estándares de muchos frameworks web. Suficientemente chico para que sea llamado “micro-framework“\cite{Fsck}. Pero esto no significa que hace menos que otros frameworks, sino que fue diseñado para ser extensible desde los cimientos. Provee un núcleo sólido con los servicios básicos, mientras el resto puede ser provisto por extensiones. 
+
+El hecho de que permita elegir y poner la extensión que se desee, hace que se termine usando un framework que no tiene funcionalidades de más y sirve para exactamente lo que se necesite.
 Flask tiene tres dependencias principales: rutas, debugging y WSGI (Web Server Gateway Interface, provisto por Werkzeug); los templates son provistos por Jinja2, y la interacción por línea de comandos viene de Click. Estas dependencias fueron escritas por Armin Ronacher, el autor de Flask.
+
 Flask no dispone de acceso nativo a bases de datos, validar formularios web, autenticación, u otras tareas de alto nivel. Sólo se pueden usar a través de extensiones. Como desarrollador, se puede decidir integrar la que se desee o escribir una propia. Esto va en contraste con grandes frameworks, ya que es complejo o imposible cambiar estas funcionalidades.
 
 \section[Python en Data Science]{Python en Data Science}
 
 La comunidad de la ciencia de datos está cambiando de R a Python, ya que provee a los científicos una gran cantidad de funcionalidades y les permite crear sus propias funcionalidades para realizar cálculos muy complejos. Además, les permite generar varios tipos de reportes de análisis, histogramas, grafos, y mucho más.
-Existen muchos módulos de Data Science, entre ellos numpy, Pandas, etc.
+Existe una gran variedad de módulos de Data Science entre los que se destacan numpy y Pandas.
 
 \subsection[Numpy]{Numpy}
 
-NumPy, abreviatura de Numerical Python, viene siendo hace mucho tiempo una parte fundamental para la computación numérica. Provee estructuras de datos, algoritmos y liberías necesarias para la mayoría de las aplicaciónes científicas que involucran datos numéricos en Python. NumPy contiene entre otras cosas:
+NumPy, abreviatura de Numerical Python, es una parte fundamental para la computación numérica. Provee estructuras de datos, algoritmos y liberías necesarias para la mayoría de las aplicaciónes científicas que involucran datos numéricos en Python. NumPy contiene entre otras cosas:
 \begin{outline}
     \1 ndarray: Un array multidimensional rápido y eficiente.
-    \1 Funciones para realizar cálculos basados en elementos con matrices u operaciones matemáticas entre matrices
+    \1 Funciones para realizar cálculos basados en elementos con matrices u operaciones matemáticas entre matrices.
     \1 Herramientas para leer y escribir datasets al disco.
     \1 Operaciones de álgebra lineal y generación de números aleatorios.
-    \1 Una API en C muy madura que permite a las extensiones de Python acceder a las estructuras de datos de NumPy
+    \1 Una API en C muy madura que permite a las extensiones de Python acceder a las estructuras de datos de NumPy.
 \end{outline}
 Mas allá de las capacidades de procesamiento de matrices que NumPy le agrega a Python, una de sus principales usos para análisis de datos es como contenedor para que los datos sean pasados entre algoritmos y librerías. Para datos numéricos, los arrays de NumPy son más eficientes para guardar y manipular los datos que cualquier otrá librería de Python.
 
@@ -116,20 +119,20 @@ React usa DOM Virtual para ayudar al navegador a usar menos recursos cuando se n
 
 React sólo cambia el DOM cuando el estado de un componente cambia explícitamente.
 Cuando hay un cambio, React actualiza el DOM Virtual relativo al componente que necesita cambiar.
-La clave está en que sólo actualiza el DOM una vez, asi el "repintado" y "reflujo" que tiene que realizar el navegador se hace sólo una vez.
+La clave está en que sólo actualiza el DOM una vez, asi el \textit{repintado} y \textit{reflujo} que tiene que realizar el navegador se hace sólo una vez.
 
 
 \section[Microservicios]{Microservicios}
 
-Los microservicios son servicios pequeños y autónomos que trabajan en conjunto. 
-A medida que el código va creciendo cuando se agregan funcionalidades, se hace cada vez complejo saber dónde se tienen que hacer los cambios.
-Las funcionalidades nuevas empiezan a quedar esparcidas por todo el código, haciendo que sea cada vez más dificil encontrar errores.
+Cuando se programan aplicaciones monolíticas (todas las funcionalidades en una sola aplicación), a medida que el código va creciendo cuando se agregan funcionalidades, se hace cada vez complejo saber dónde se tienen que hacer los cambios.
+Las funcionalidades nuevas empiezan a quedar esparcidas por todo el código, haciendo que sea cada vez más difícil encontrar errores.
 
-Los microservicios afrontan un acercamiento hacia la independencia de servicios. Enfocandose en la obviedad donde el código solo sirve para alguna funcionalidad. Y al mantener este servicio enfocado dentro de sus límites, se evita que crezca demasiado.
+
+Los microservicios son servicios pequeños y autónomos que trabajan en conjunto para afrontan un acercamiento hacia la independencia de funcionalidades. Enfocándose en la obviedad donde el código solo sirve para alguna funcionalidad. Y al mantener este servicio enfocado dentro de sus límites, se evita que crezca demasiado.
 
 \subsection[Heterogeneidad Tecnológica]{Heterogeneidad Tecnológica}
 
-Con un sistema compuesto de multiples servicios colaborando entre sí, podemos elegir usar diferentes tecnologías dentro de cada uno de éstos. Esto permite elegir la herramienta correcta para cada trabajo, en lugar de tener que elegir una opción que sirva un poco para todo, y puede terminar siendo perjudicial para el sistema.
+Con un sistema compuesto de múltiples servicios colaborando entre sí, podemos elegir usar diferentes tecnologías dentro de cada uno de éstos. Esto permite elegir la herramienta correcta para cada trabajo, en lugar de tener que elegir una opción que sirva un poco para todo, y puede terminar siendo perjudicial para el sistema.
 
 Si una parte del sistema necesita mejorar su performance, podemos decidir cambiar de tecnología a una que resulte mejor para esa tarea en particular.
 
@@ -142,7 +145,7 @@ Si una parte del sistema necesita mejorar su performance, podemos decidir cambia
 
 \break
 
-El gráfico muestra tres servicios distintos, un núcleo que usa Django, un servicio de análisis de datos, con Flask y Pandas, y un servicio de visualización de datos con React.
+La figura ~\ref{fig:microht} muestra tres servicios distintos, un núcleo que usa Django, un servicio de análisis de datos, con Flask y Pandas, y un servicio de visualización de datos con React.
 
 \subsection[Independencia]{Independencia}
 
@@ -163,8 +166,8 @@ En cambio, con microservicios, si en un determinado momento se necesita, por eje
 
 \subsection[Facilitar deploy]{Facilitar deploy}
 
-Hacer un pequeño cambio en un sistema monolítico requeriría deployar toda la aplicación para hacer efectivo el cambio. Esto genera un gran impacto y un alto riesgo. 
-Desde la perspectiva de los microservicios, el cambio que se hace sobre un servicio permite deployar sólo ese módulo, sin que los otros sepan que hubo una modificación. Además, el código es deployado mas rápido. 
+Hacer un pequeño cambio en un sistema monolítico requeriría \textit{deployar} toda la aplicación para hacer efectivo el cambio. Esto genera un gran impacto y un alto riesgo. 
+Desde la perspectiva de los microservicios, el cambio que se hace sobre un servicio permite \textit{deployar} sólo ese módulo, sin que los otros sepan que hubo una modificación. Además, el código es desplegado mas rápido. 
 De haber un problema en la actualización, se puede aislar a un sólo servicio, permitiendo retroceder a una versión anterior.
 
 \subsection[Reemplazabilidad]{Reemplazabilidad}
@@ -172,20 +175,19 @@ De haber un problema en la actualización, se puede aislar a un sólo servicio, 
 El costo de reemplazar un servicio por una mejor implementación es más fácil de manejar cuando hay independencia. 
 Si en un futuro se quisiera, por ejemplo, cambiar el módulo de encuestas, sólo haría falta reemplazar ese pequeño sistema sin tener que modificar el resto. Ni siquiera deberian enterarse del cambio.
 
->> Gráfico conceptual del nucleo y otras apps
-
 \section[REST]{Rest}
 
 REpresentational State Transfer (Transferencia de estado representacional, su traducción) es un estilo arquitectural inspirado en la Web. 
-Una parte importante es el concepto de **recursos**. 
-El servidor crea diferentes representaciones del recurso en un request. La forma en que es enviado esta desacoplado a cómo está guardado internamente. Cuando un cliente pide por un recurso, se le da una representación con la estructura de JSON.
+
+Una parte importante es el concepto de \textit{recursos}. 
+El servidor crea diferentes representaciones del recurso en un request y la forma en que es enviado esta desacoplado a cómo está guardado internamente. Cuando un cliente pide por un recurso, se le da una representación con la estructura de JSON.
+
 A lo largo de los años, se desarrollaron muchos servicios basados en la arquitectura REST, que usa las funcionalidades provistas por la capa de aplicación del protocolo HTTP \cite{RestSoap} \cite{IETF}. Esto resultó en un incremento en el interés comparado al tradicional SOAP (Simple Object Access Protocol). Además, grandes compañías como Twitter o Amazon usan interfaces del tipo REST en sus servicios, lo cual se puede ver en la documentación de sus APIs (Application Programming Interface).
 Mas allá de la tendencia, no hay estándares o guias de cómo desarrollar un servicio web RESTful. En lugar de esto, existen buenas prácticas.
 
 \subsection[No versionado]{No versionado}
 
 Versionar una API Web es una de las consideraciones más importantes a la hora de diseñar un servicio web, ya que la API representa el punto de acceso al servicio y oculta su implementación. Es por esto que una interfaz web nunca deberia ser desplegada sin un identificador de version \cite{WAPID}. Para versionar, existen diferentes acercamientos como incluirlo en la URI (Uniform Resource Identifier) del servicio web o usando el header HTTP para seleccionar la versión apropiada \cite{WAPID}. Pero el servicio web basado en REST no necesita ser versionado debido a hipermedia. Es por esto que los servicios web RESTful pueden ser comparados con los sitios web tradicionales, que pueden ser accedidos por todos los navegadores cuando se cambia el contenido del sitio. Asi que no sería necesario agregar información del lado del cliente.
-Mas allá de esto, el uso de versionado genera un impacto negativo en los servicios web ya desplegados, ya que aumenta el esfuerzo por mantenerlos.
 
 
 \subsection[Descripción de los recursos]{Descripción de los recursos}
@@ -224,7 +226,7 @@ Los mensajes de error tienen que ser claros y entendibles, para que su causa pue
 Cada URI de un recurso puede ser extendida con parámetros para proveer información opcional al servicio. A continuación se detallan cuatro casos de uso:
 \begin{outline}
     \1 Filtrado: para filtrar información de un recurso, puede usarse sus atributos o algun lenguaje de queries. La elección de una de estas variantes, depende de la necesidad del poder de expresión que se tenga para filtrar. 
-    \1 Ordenamiento: para ordenar la información, se recomienda \cite{BPRA} una lista de atributos separados por coma con el parámetro "sort" en la URI, seguido por un signo de más (+) como prefijo para un orden ascendente, o un signo menos (-) para un orden descendente.
+    \1 Ordenamiento: para ordenar la información, se recomienda \cite{BPRA} una lista de atributos separados por coma con el parámetro \textit{sort} en la URI, seguido por un signo de más (+) como prefijo para un orden ascendente, o un signo menos (-) para un orden descendente.
     \1 Selección: la selección de información en forma de atributos reduce el tamaño de transmisión sobre la red, respondiendo sólo con la información pedida. Para este propósito, se recomienda una lista de atributos separadas por coma.
     \1 Paginación: La paginación permite partir la información en varias páginas virtuales, mientras se referencian la página anterior, la próxima, la primera y la última. 
 \end{outline}
@@ -232,7 +234,7 @@ Cada URI de un recurso puede ser extendida con parámetros para proveer informac
 
 Usando REST como el estilo de arquitectura subyacente de un sistema, el cliente interactúa con las representaciones de un recurso en lugar de usarlo directamente. La interacción entre el cliente y el servidor esta construido en la capa de aplicación del protocolo HTTP, que ya provee cierta funcionalidad para la comunicación. Para la interacción con un recurso, podriamos identificar tres buenas practicas diferentes:
 \begin{outline}
-    \1 El uso de los métodos HTTP deberían ser de acuerdo a las semánticas definidas por la especificación oficial de HTTP \cite{WAPID}. Así, el método GET de HTTP sólo debería ser usado para las operaciones sin efectos secundarios. Para una mejor visión general, la tabla a continuación muestra los métodos HTTP mas usados y sus características. Estas características pueden ser usadas para asociar los métodos HTTP con el correcto uso de la creación, lectura, edición y borrado de recursos (CRUD) \cite{RVINOSKI}.
+    \1 El uso de los métodos HTTP deberían ser de acuerdo a las semánticas definidas por la especificación oficial de HTTP \cite{WAPID}. Así, el método GET de HTTP sólo debería ser usado para las operaciones sin efectos secundarios. Para una mejor visión general, la tabla ~\ref{tab:tabla_http} muestra los métodos HTTP mas usados y sus características. Estas características pueden ser usadas para asociar los métodos HTTP con el correcto uso de la creación, lectura, edición y borrado de recursos (CRUD) \cite{RVINOSKI}.
     \1 El soporte de la operación OPTIONS es recomendada si una gran cantidad de datos tienen que ser transmitidos, ya que permite al cliente pedir los métodos soportados de la representación actual antes de transmitir la información por un medio compartido. 
     \1 El soporte del GET condicional debería ser considerado durante el desarrollo de un servicio basado en HTTP, ya que previene al servidor de tranmitir datos ya enviados anteriormente. Solo si hay modificaciones de la información solicitada desde la última solicitud, el servidor responde con la última representación  \cite{RVINOSKI}.
 \end{outline}
@@ -250,7 +252,7 @@ Usando REST como el estilo de arquitectura subyacente de un sistema, el cliente 
     
     \end{tabular}
     \caption{Características de los métodos HTTP más comúnes}
-    \label{tab:tabla_planes}
+    \label{tab:tabla_http}
 \end{table}
 
 \subsection[REST y HTTP]{REST y HTTP}
@@ -269,8 +271,8 @@ JSON Web Token es un estándar abierto (RFC 7519) que define una forma compacta 
 
 Estos son algunos escenarios donde JWT es útil:
 \begin{outline}
-    \1 Autorización: Este es el escenario mas común. Una vez que el usuario esta logueado, cada request que se haga debe incluir el JWT, permitiendo al usuario acceder a rutas, servicios y recursos que se le son permitidos con ese token. Single Sign On es una funcionalidad que usa mucho JWT, por su habilidad de poder ser usado a través de diferentes dominios.
-    \1 Intercambio de información: JSON Web Tokens son una forma segura de transmitir informacion entre partes. Como están firmados, se puede estar seguro que el emisor es quien dice que es. Además, como la firma es calculada usando el "header" y el "payload", se puede verificar que el contenido no fue modificado.
+    \1 Autorización: Este es el escenario mas común. Una vez que el usuario está logueado, cada request que se haga debe incluir el JWT, permitiendo al usuario acceder a rutas, servicios y recursos que se le son permitidos con ese token. Single Sign On es una funcionalidad que usa mucho JWT, por su habilidad de poder ser usado a través de diferentes dominios.
+    \1 Intercambio de información: JSON Web Tokens son una forma segura de transmitir información entre partes. Como están firmados, se puede estar seguro que el emisor es quien dice que es. Además, como la firma es calculada usando el \textit{header} y el \textit{payload}, se puede verificar que el contenido no fue modificado.
 \end{outline}
 \subsection[Estructura]{Estructura}
 
@@ -286,12 +288,12 @@ En su forma compacta, los JSON Web Tokens consisten de tres partes separadas por
 
 El header consiste de dos partes: el tipo de token, que es JWT, y el algoritmo que se usa para firmar, como HMAC SHA256.
 
-\begin{lstlisting}[language=json,firstnumber=1]
+\begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
 {
 "typ": "JWT",
 "alg": "HS256"
 }
-\end{lstlisting}
+\end{minted}
 Luego, este JSON es encodeado con Base64Url para formar la primer parte del JWT.
 
 \subsection[Payload]{Payload}
@@ -306,14 +308,14 @@ La segunda parte del token es el payload, que contiene los pedidos. Un pedido es
 
 Un ejemplo de payload puede ser: 
 
-\begin{lstlisting}[language=json,firstnumber=1]
+\begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
 {
   "token_type": "refresh",
   "exp": 1582059853,
   "jti": "e9b85778f3f44decba69a611e4e1c700",
   "user_id": 1
 }
-\end{lstlisting}
+\end{minted}
 
 El payload luego es encodeado con Base64Url para formar la segunda parte del JWT.
 
@@ -324,7 +326,7 @@ Por ejemplo, usando el algoritmo HMAC SHA256, la firma se crea de la siguiente f
 
 \begin{lstlisting}[language=Python]
 HMACSHA256(
-    base64UrlEncode(header) + "." +
+    base64UrlEncode(header) + “.“ +
     base64UrlEncode(payload),
     clave-secreta
 )
@@ -335,28 +337,23 @@ La firma es usada para verificar que el mensaje no fue cambiado en el camino, y 
 
 El resultado van a ser tres strings en Base64Url, separados por puntos que pueden ser fácilmente pasados por HTTP, siendo muy compactos comparado con estándares XML como SAML.
 
-The output is three Base64-URL strings separated by dots that can be easily passed in HTML and HTTP environments, while being more compact when compared to XML-based standards such as SAML.
-
 Lo siguiente muestra un JWT formado con las tres partes provistas:
 
 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\break eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU4MjA1OTg1MywianRpIj\break oiZTliODU3NzhmM2Y0NGRlY2JhNjlhNjExZTRlMWM3MDAiLCJ1c2VyX2lkIj\break oxLCJjYXJyZXJhcyI6WyJXIl0sInVzZXJuYW1lIjoiYWRtaW4ifQ.\break KryBoqAQpHNliUUw3-xLJE2u4M6_tBByJQtf7IFYQis
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\break eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTU4MjA1OTg1MywianRpIj\break oiZTliODU3NzhmM2Y0NGRlY2JhNjlhNjExZTRlMWM3MDAiLCJ1c2VyX2lkIj\break oxLCJjYXJyZXJhcyI6WyJXIl0sInVzZXJuYW1lIjoiYWRtaW4ifQ.\break KryBoqAQpHNliUUw3-xLJE2u4M6\_tBByJQtf7IFYQis
 
 
 
 \subsection[¿Cómo funciona?]{¿Cómo funciona?}
 
 En autenticación, cuando el usuario se loguea usando sus credenciales, se le provee un JSON Web Token. Como es una credencial, se debe tener cuidado con los problemas de seguridad que se puedan tener. En general, no se deben mantener tokens mas tiempo del requerido. Tampoco se tiene que guardar datos sensibles de sesiones en el almacenamiento del navegador.
-Cuando un usuario quiere ingresar a una ruta o un recurso protegido, tiene que mandar el JWT en el header de autorización, usando el esquema "Bearer". El contenido del header tiene que verse como lo siguiente:
+Cuando un usuario quiere ingresar a una ruta o un recurso protegido, tiene que mandar el JWT en el header de autorización, usando el esquema “Bearer“. El contenido del header tiene que verse como lo siguiente:
 \begin{lstlisting}[language=Python]
 Authorization: Bearer <token>
 \end{lstlisting}
 
 Este puede ser un mecanismo de autorización sin estado. Las rutas protegidas del servidor chequean que el JWT sea válido. Si lo es, el usuario puede ingresar a esas rutas protegidas. Si el JWT tiene los datos necesarios, se reducen las queries a la base de datos, aunque no siempre sea el caso.
 Si el token es enviado en el header de autorización, Cross-Origin Resource Sharing (CORS) no va a ser un problema ya que no usa cookies.
-
->> Gráfico de pedido de token
-
 
 
 \subsection[Problemas que resuelve]{Problemas que resuelve}
@@ -370,7 +367,7 @@ Los principales problemas que resuelve son:
 \2 Sesiones del lado del cliente
 \end{outline}
 
-\subsection[Client-side/Stateless Sessions]{Client-side/Stateless Sessions]}
+\subsection[Client-side/Stateless Sessions]{Client-side/Stateless Sessions}
 
 Las llamadas sesiones sin estado (stateless sessions) son en realidad datos del lado del cliente (client-side). El aspecto fundamental de esta aplicación reside en el uso de firmas y posiblemente encriptación para proteger el contenido de la sesion. Como los datos del lado del cliente pueden ser manipulados con facilidad. Por esta razón, se tiene que tener mucho cuidado desde el backend.
 
@@ -428,7 +425,7 @@ Para construir una imágen, es necesario crear un archivo llamado Dockerfile.
 \begin{lstlisting}
     FROM ubuntu:16.04
     RUN apt-get -y update
-    CMD["echo Hola"]
+    CMD[“echo Hola“]
 \end{lstlisting}
 
 El dockerfile anterior busca una imágen de Ubuntu con el tag 16.04. Luego ejecutará un comando para actualizar los paquetes del sistema operativo y finalmente mostrará el mensaje Hola.
@@ -491,7 +488,7 @@ A diferencia de Apache, nginx no tiene la habilidad de embeber un intérprete al
 
 \subsection[Forward Proxy]{Forward Proxy}
 
-Se le llama *forward proxy* a la configuración por defecto que se encuentra en todas las conexiones salientes de internet. Se ve algo asi:
+Se le llama \textit{forward proxy} a la configuración por defecto que se encuentra en todas las conexiones salientes de internet. Se ve algo asi:
 
 \begin{figure}[h!]
   \centering
@@ -500,12 +497,12 @@ Se le llama *forward proxy* a la configuración por defecto que se encuentra en 
   \label{fig:forwardproxy}
 \end{figure}
 
-Las conexiones salientes de una computadora son capturadas por el *forward proxy* y reenviadas a Internet. Para Internet, todas las computadoras aparecen como si vinieran del mismo lugar- el *forward proxy*.
+Las conexiones salientes de una computadora son capturadas por el \textit{forward proxy} y reenviadas a Internet. Para Internet, todas las computadoras aparecen como si vinieran del mismo lugar- el \textit{forward proxy}.
 
 
 \subsection[Reverse Proxy]{Reverse Proxy}
 
-Se le llama *reverse proxy* a lo opuesto de *forward proxy*, y es una configuración muy común para servir aplicaciones web dinámicas y para balance de carga.
+Se le llama \textit{reverse proxy} a lo opuesto de \textit{forward proxy}, y es una configuración muy común para servir aplicaciones web dinámicas y para balance de carga.
 
 \begin{figure}[h!]
   \centering
@@ -514,18 +511,18 @@ Se le llama *reverse proxy* a lo opuesto de *forward proxy*, y es una configurac
   \label{fig:reverseproxy}
 \end{figure}
 
-En este ejemplo, el *reverse proxy* hace de multiplexor para muchas conexiones de internet, a una aplicación dinámica. El *reverse proxy* mira el request, y lo reenvia a la aplicación.
+En este ejemplo, el \textit{reverse proxy} hace de multiplexor para muchas conexiones de internet, a una aplicación dinámica. El \textit{reverse proxy} mira el request, y lo reenvia a la aplicación.
 
 \subsection[Balance de carga]{Balance de carga}
 
-Una de las formas mas comunes de escalar una aplicación web es usar *balance de carga*. La idea detrás de esto, es distribuir la carga, o tráfico web, a través de diferentes *application servers*.
-El funcionamiento normal de una sola aplicación con nginx es que los visitantes ingresan el nombre de dominio y son ruteados directamente al servidor donde nginx está sirviendo la *única* aplicación. El problema de esto es que cuando se tienen miles de conexiones visitando la aplicación, es probable que un solo servidor no pueda manejarlo. 
+Una de las formas mas comunes de escalar una aplicación web es usar \textit{balance de carga}. La idea detrás de esto, es distribuir la carga, o tráfico web, a través de diferentes \textit{application servers}.
+El funcionamiento normal de una sola aplicación con nginx es que los visitantes ingresan el nombre de dominio y son ruteados directamente al servidor donde nginx está sirviendo la única aplicación. El problema de esto es que cuando se tienen miles de conexiones visitando la aplicación, es probable que un solo servidor no pueda manejarlo. 
 Ahi es cuando juega un papel importante el balanceador de carga, que recibe todo el tráfico ingresante y lo distribuye a través de un conjunto de servidores de aplicación.
-Existen distintos tipos de balanceos de carga: por software y por hardware. Nginx tiene la habilidad de correr como un balanceador de carga de software, usando el módulo http_proxy.
+Existen distintos tipos de balanceos de carga: por software y por hardware. Nginx tiene la habilidad de correr como un balanceador de carga de software, usando el módulo http\_proxy.
 
-El balance de carga es en definitiva un *reverse proxy*, con tres diferencias fundamentales: 
+El balance de carga es en definitiva un \textit{reverse proxy}, con tres diferencias fundamentales: 
 \begin{outline}
-\1 Los balanceadores de carga reenvian el trafico a traves de varios *backends*, mientras que un reverse proxy tradicional lo hace hacia uno solo.
-\1 Los balanceadores de carga usualmente operan en la capa 7 (HTTP) o en la capa 4 (TCP) del modelo OSI, cuando típicamente sólo operariamos en la capa 7 usando un *reverse proxy* de aplicaciones modernas.
+\1 Los balanceadores de carga reenvian el trafico a traves de varios \textit{backends}, mientras que un reverse proxy tradicional lo hace hacia uno solo.
+\1 Los balanceadores de carga usualmente operan en la capa 7 (HTTP) o en la capa 4 (TCP) del modelo OSI, cuando típicamente sólo operariamos en la capa 7 usando un reverse proxy de aplicaciones modernas.
 \1 La escala es crítica para los balanceadores de carga: en sitios ocupados, pueden ver 20 veces la cantidad de tráfico que recibe un servidor de aplicación. Por ejemplo, un servidor de aplicaciones potente solo necesitará manejar entre 100 y 200 solicitudes por segundo, mientras que un balanceador de carga puede recibir más de 10,000 solicitudes por segundo.
 \end{outline}
