@@ -7,7 +7,7 @@ También se utilizó Travis para tener un entorno de integración continua. Esto
 
 \section[Núcleo]{Núcleo}
 
-El núcleo se encarga de administrar los datos no sensibles de los alumnos y sus materias cursadas, las inscripciones, planes de estudio con sus créditos, recorrido obligatorio y recomendado de inscripciones, entre otros.
+El núcleo se encarga de administrar los datos no sensibles de los estudiantes y sus materias cursadas, las inscripciones, planes de estudio con sus créditos, recorrido obligatorio y recomendado de inscripciones, entre otros.
 El núcleo tiene la capacidad de servir dichos datos para que sean consumidos por los usuarios que tengan los permisos correspondientes.
 Los usuarios tienen permisos asignados que corresponden con la carrera a la que pertenecen, que les permiten consultar datos de dicha carrera. 
 
@@ -58,8 +58,8 @@ Estos importadores son:
 \2 Carreras
 \2 Planes de estudio con sus materias
 \2 Prerrequisitos obligatorios y recomendados de materias
-\2 Alumnos con sus datos personales
-\2 Materias cursadas por alumnos
+\2 Estudiantes con sus datos personales
+\2 Materias cursadas por estudiantes
 \2 Inscripciones a materias
 \end{outline}
 
@@ -188,7 +188,7 @@ Esta es la configuración para una sola instancia, sin límite de CPU ni memoria
 
 \section[Análisis de Datos]{Análisis de Datos}
 
-Para poder obtener información relevante de las carreras, materias y alumnos, se debe hacer un análisis de los datos recopilados históricamente.
+Para poder obtener información relevante de las carreras, materias y estudiantes, se debe hacer un análisis de los datos recopilados históricamente.
 
 Si bien el núcleo provee una gran cantidad de datos, éstos necesitan una manipulación, procesamiento y una limpieza para que puedan ser analizados.
 
@@ -245,7 +245,7 @@ URI: /materias/<cod\_materia>/dispersion-notas \\
 
 Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: codigo de la carrera. \\
 
-Dada una materia, se hace un análisis de la dispersión de las notas dentro de un período. Teniendo en cuenta alumnos, sus notas y el promedio de ese alumno.
+Dada una materia, se hace un análisis de la dispersión de las notas dentro de un período. Teniendo en cuenta estudiantes, sus notas y el promedio de ese estudiante.
 
 \paragraph{Número de recursantes}\mbox{}\\
 
@@ -253,10 +253,10 @@ URI: /materias/<cod\_materia>/recursantes \\
 
 Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: codigo de la carrera. \\
 
-Dada una materia, analiza qué alumnos son recursantes y cuantas veces.
+Dada una materia, analiza qué estudiantes son recursantes y cuantas veces.
 
 
-\subsubsection{Análisis sobre alumnos}
+\subsubsection{Análisis sobre estudiantes}
 
 \paragraph{Porcentaje de aprobación por área}\mbox{}\\
 
@@ -264,7 +264,7 @@ URI: /alumnos/<legajo>/porcentajes-areas \\
 
 Parámetros adicionales: carrera, inicio, fin, plan \\
 
-Dado un alumno, se hace un análisis de los porcentajes de aprobación que tiene con respecto a las diferentes áreas de la carrera y el plan que se está analizando, dentro del período elegido.
+Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a las diferentes áreas de la carrera y el plan que se está analizando, dentro del período elegido.
 
 Cada carrera tiene sus propias áreas. En particular, y tomado a forma de ejemplo, las áreas de la Licenciatura en Informática se muestran en la tabla ~\ref{tab:tabla_areas}.
 
@@ -290,7 +290,7 @@ URI: /alumnos/<legajo>/porcentajes-nucleos \\
 
 Parámetros adicionales: carrera, inicio, fin, plan \\
 
-Dado un alumno, se hace un análisis de los porcentajes de aprobación que tiene con respecto a los diferentes núcleos de la carrera y el plan que se está analizando, dentro del período elegido.
+Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a los diferentes núcleos de la carrera y el plan que se está analizando, dentro del período elegido.
 
 Cada carrera tiene sus propias núcleos. En particular, y tomado a forma de ejemplo, los núcleos de la Licenciatura en Informática se muestran en la tabla ~\ref{tab:tabla_nucleos}.
 
@@ -316,7 +316,7 @@ URI: /alumnos/<legajo>/notas \\
 
 Parámetros adicionales: carrera, inicio, fin, plan \\
 
-Dado un alumno, se obtienen las diferentes notas que tuvo a lo largo de sus cursadas.
+Dado un estudiante, se obtienen las diferentes notas que tuvo a lo largo de sus cursadas.
 
 \paragraph{Porcentaje de avance de carrera}\mbox{}\\
 
@@ -324,7 +324,7 @@ URI: /alumnos/<legajo>/porcentaje-carrera \\
 
 Parámetros adicionales: carrera, inicio, fin, plan \\
 
-Dado un legajo de alumno, se realiza un análisis para determinar el porcentaje de avance de la carrera, según el plan que se analice. Dado que cada plan tiene una cantidad distinta de materias, este dato cambia según el plan que se analice.
+Dado un legajo de estudiante, se realiza un análisis para determinar el porcentaje de avance de la carrera, según el plan que se analice. Dado que cada plan tiene una cantidad distinta de materias, este dato cambia según el plan que se analice.
 
 \paragraph{Promedio por períodos}\mbox{}\\
 
@@ -332,18 +332,18 @@ URI: /alumnos/<legajo>/scores \\
 
 Parámetros adicionales: carrera, inicio, fin, plan \\
 
-Dado un alumno, se calcula cuál fue su \textit{score} por cada período. Es decir, su rendimiento semestral. 
+Dado un estudiante, se calcula cuál fue su \textit{score} por cada período. Es decir, su rendimiento semestral. 
 
 El \textit{score} se calcula sacando un promedio de sus notas en un semestre. Las materias que sólo se distinguen entre “Aprobado” y “Desaprobado” y no disponen de una nota, se les asigna una nota para sacar este promedio.
 Las materias con nota “Aprobado” son consideradas como un 7, y las materias con nota “Desaprobado” son consideradas como un 3.
 
 Entonces, el \textit{score} no es un promedio preciso, sino una estipulación de lo que fué su rendimiento en ese período.
 
-Este score es útil para analizar el rendimiento de un alumno y puede servirle a las carreras para tomar decisiones tempranas.
+Este score es útil para analizar el rendimiento de un estudiante y puede servirle a las carreras para tomar decisiones tempranas.
 
 \subsubsection{Análisis sobre carreras}
 
-\paragraph{Cantidad de alumnos por semestre}\mbox{}\\
+\paragraph{Cantidad de estudiantes por semestre}\mbox{}\\
 
 URI: /carreras/<carrera>/alumnos \\
 
@@ -388,20 +388,20 @@ Dada una carrera, se obtiene el total de graduados.
 \paragraph{Dispersión de scores y promedios}\mbox{}\\
 URI: /carreras/<carrera>/dispersion-score-promedio \\
 
-El objetivo de este análisis es el agrupar alumnos en base al score y al promedio. Mostrando grupos de interés sobre los cuales se podrán implementar acciones específicas.
+El objetivo de este análisis es el agrupar estudiantes en base al \textit{score} y al promedio. Mostrando grupos de interés sobre los cuales se podrán implementar acciones específicas.
 
 \paragraph{Materias Traba}\mbox{}\\
 
 URI: /carreras/<carrera>/materias-traba \\
 
-Dada una carrera, se quiere analizar qué materias son las que traban a los alumnos. 
+Dada una carrera, se quiere analizar qué materias son las que traban a los estudiantes. 
 Para poder realizar este análisis, se necesitaron los siguientes datos:
 \begin{outline}
 \1 Índice de aprobación de una materia (cantidad de aprobados / cantidad total de cursantes).
 \1 Cuántas materias obligatorias dependen de ella.
 \end{outline}
 
-Luego de calcular estos datos materia por materia, se calcula un score. Este score determina qué materia puede llegar a trabar la carrera de un alumno.
+Luego de calcular estos datos materia por materia, se calcula un score. Este score determina qué materia puede llegar a trabar la carrera de un estudiante.
 
 \begin{align*}
   Score = (1 - IndiceAprobacion) * CantidadObligatoriasDependientes\\
@@ -430,7 +430,7 @@ Estos datos se desprenden del módulo de análisis, y se agrupan de la siguiente
 \begin{outline}
 \2 Datos sobre carreras.
 \2 Datos sobre materias.
-\2 Datos sobre alumnos.
+\2 Datos sobre estudiantes.
 \end{outline}
 
 Cada uno de estos grupos de datos tiene su propia pantalla de tipo reporte, donde el usuario ingresa los parámetros necesarios para cada reporte.
@@ -506,8 +506,8 @@ La cantidad total de graduados de la carrera se muestra en forma de tarjeta info
   \label{fig:sa-graduados}
 \end{figure}
 
-\paragraph{Dispersión de alumnos} \mbox{}\\
-El siguiente gráfico muestra la dispersión de los alumnos con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los alumnos que se desempeñaron por encima de su historial y cuáles no (figura~\ref{fig:sa-dispersion}).
+\paragraph{Dispersión de estudiantes} \mbox{}\\
+El siguiente gráfico muestra la dispersión de los estudiantes con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los estudiantes que se desempeñaron por encima de su historial y cuáles no (figura~\ref{fig:sa-dispersion}).
 
 \begin{figure}[H]
   \centering
@@ -564,7 +564,7 @@ Se dispone de un formulario para realizar un reporte, donde el usuario puede sel
 Una vez que el formulario fue completado, se muestran los siguientes gráficos.
 
 \paragraph{Estadísticas básicas de materia} \mbox{}\\
-El siguiente gráfico muestra en forma de columnas los resultados de los alumnos en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla  (figura~\ref{fig:sa-datos-basico}).
+El siguiente gráfico muestra en forma de columnas los resultados de los estudiantes en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla  (figura~\ref{fig:sa-datos-basico}).
 
 \begin{figure}[H]
   \centering
@@ -574,7 +574,7 @@ El siguiente gráfico muestra en forma de columnas los resultados de los alumnos
 \end{figure}
 
 \paragraph{Detalle de aprobación} \mbox{}\\
-El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los alumnos esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un exámen equivalente, cuántos con una equivalencia equivalente y cuántos con exámen  (figura~\ref{fig:sa-detalle-aprobacion}).
+El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los estudiantes esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un exámen equivalente, cuántos con una equivalencia equivalente y cuántos con exámen  (figura~\ref{fig:sa-detalle-aprobacion}).
 
 \begin{figure}[H]
   \centering
@@ -584,10 +584,10 @@ El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los a
 \end{figure}
 
 \paragraph{Dispersión de notas con respecto al promedio} \mbox{}\\
-Este gráfico muestra en forma de dispersión como les fue a los alumnos con respecto a su promedio.
+Este gráfico muestra en forma de dispersión como les fue a los estudiantes con respecto a su promedio.
 
 \subsubsection{Visualización por alumno}
-Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles, luego ingresa el legajo del alumno a analizar, un plan de estudios, y una fecha de inicio y fin. De esta forma se analizará solo en el rango de fechas que se eligió.
+Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles, luego ingresa el legajo del estudiante a analizar, un plan de estudios, y una fecha de inicio y fin. De esta forma se analizará solo en el rango de fechas que se eligió.
 
 Una vez que el formulario fue completado, se muestran los siguientes gráficos.
 
