@@ -5,7 +5,7 @@
 
 \subsection[Resultados esperados]{Resultados esperados}
 
-Se espera con este desarrollo tener un sistema capaz de brindarle datos a todos los interesados. Para que esto se cumpla, la implementación tiene que ser capaz de manejar todos los pedidos que recibe y responder en consecuencia. 
+El desarrollo de las aplicaciones debe darle respuesta a todos los interesados. Para que se cumplan estos requisitos, la implementación tiene que ser capaz de manejar todos los pedidos que recibe y responder en consecuencia. 
 
 Si bien la problemática inicial implica que sólo se consultarán datos para analizarlos y ser visualizados por los directores de las carreras de la Universidad Nacional de Quilmes, no hay que descartar que pueda ser extendido dado su potencial.
 
@@ -17,9 +17,9 @@ Se utilizó la herramienta jMeter para realizar los requests y evaluar los tiemp
 
 Para medir los tiempos de respuesta, se usará APDEX.
 
-APDEX (Índice de Performance de la Aplicación, por sus siglas en inglés) es un estandard abierto para medir la performance de una a aplicación de software. Su propósito es convertir las mediciones en información sobre la satisfacción del usuario, al especificar una forma uniforme de analizar e informar sobre el grado en que el rendimiento medido cumple con las expectativas del usuario.
-Para realizar una medición APDEX, es necesario establecer un tiempo \emph{satisfactorio} y un tiempo \emph{tolerable}.
-Una vez establecidos estos valores y tendo los resultados de la prueba, se calcula el índice:
+APDEX (Índice de Performance de la Aplicación, por sus siglas en inglés) es un estándar abierto para medir la \textit{performance} de una a aplicación de software. Su propósito es convertir las mediciones en información sobre la satisfacción del usuario, al especificar una forma uniforme de analizar e informar sobre el grado en que el rendimiento medido cumple con las expectativas del usuario.
+Para realizar una medición \textit{APDEX}, es necesario establecer un tiempo \emph{satisfactorio} y un tiempo \emph{tolerable}.
+Una vez establecidos estos valores y teniendo los resultados de la prueba, se calcula el índice:
 
 \begin{align*}
   Apdex = \frac{Satisfactorios + \frac{Tolerables}{2}}{Total}\\
@@ -106,7 +106,7 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 
 \subsubsection{Resultados generales de la prueba}
 
-Al igual que en la prueba anterior, jMeter nos muestra estos resultados (~\ref{tab:300u_10m_gen}).
+Al igual que en la prueba anterior, jMeter nos muestra estos resultados (Tabla ~\ref{tab:300u_10m_gen}).
 
 Con un total de 20918 pedidos, el núcleo no pudo resolver en promedio un 1.37\% de los requests dando como resultado el error HTTP 502.
 
@@ -199,9 +199,9 @@ Estos resultados también muestran una mejora en el tiempo promedio de respuesta
 
 \subsubsection{Resultados sobre el uso de recursos durante la prueba}
 
-La tabla~\ref{tab:300u_10m_2i_rec} muestra que el consumo de cpu por instancia bajó de 88\% a 67\% y 68\% para cada una de las respectivas instancias. 
+La tabla~\ref{tab:300u_10m_2i_rec} muestra que el consumo de CPU por instancia bajó de 88\% a 67\% y 68\% para cada una de las respectivas instancias. 
 
-El consumo de memoria se mantuvo en los mismos parámetros, aunque al ser dos instancias esto se duplicó. Igualmente, son valores bajos con respecto a la arquitectura provista.
+El consumo de memoria se mantuvo en los mismos parámetros, aunque al ser dos instancias el consumo se duplicó. Igualmente, son valores bajos con respecto a la arquitectura provista.
 \begin{table}[!htbp]
     \centering
     \makegapedcells
@@ -235,4 +235,4 @@ Después, se planteó un escenario donde 300 usuarios simultáneos realizaron re
 
 Por último, y con motivo de mejorar los resultados para una mejor experiencia de los usuarios, se realizó la misma prueba duplicando las instancias de docker y haciendo uso del balanceador de carga de Nginx. Los resultados mejoraron notablemente llegando a un APDEX de 0.667 y bajando los errores a 0.02\%. Además, se incrementó la cantidad de pedidos que resolvió en ese tiempo, llevandolos a 33499 (un 60.1\% más).
 
-Teniendo en cuenta que en la UNQ los momentos en que los sistemas académicos son mas exigidos es en el inicio y en el final de los cuatrimestres, se podría duplicar las instancias de docker en estos momentos (o triplicar, de ser necesario).
+Teniendo en cuenta que en la UNQ los momentos en que los sistemas académicos son más exigidos es en el inicio y en el final de los cuatrimestres, se podría duplicar las instancias de docker en estos momentos (o triplicar, de ser necesario).

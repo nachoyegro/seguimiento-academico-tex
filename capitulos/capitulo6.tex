@@ -21,13 +21,13 @@ Se ha aprendido acerca de la importancia de la disposición de los datos y cómo
 
 \section[Lineas de Trabajos futuros]{Lineas de Trabajos futuros}
 
-Dado que el sistema se pensó de forma tal que se pueda extender fácilmente, y que sus datos puedan ser consultados por otros servicios, existen varias mejoras y puntos de extensión que se detallan a continuación:
+Dado que el sistema se diseñó y desarrolló de forma tal que se pueda extender fácilmente, y que sus datos puedan ser consultados por otros servicios, existen varias mejoras y puntos de extensión que se detallan a continuación.
 
 \subsection[Aplicación para estudiantes]{Aplicación para estudiantes}
 
 Podría existir una aplicación para que usen los estudiantes (puede ser móvil o web), donde puedan consultar su historial dentro de la Universidad. Si bien esta tarea se puede realizar en Guaraní, se podría integrar con servicios que brinda la universidad, como la consulta del saldo disponible en la tarjeta de la UNQ, notificaciones con novedades y noticias que estén relacionadas únicamente con los estudiantes.
-Esta aplicación, a su vez, puede tener un aspecto mas social: que los estudiantes pongan tips y consejos sobre las materias.
-Además, podría recibir feedback sobre los que ya cursaron, los horarios, las comodidades, la calidad de enseñanza, etc.
+Esta aplicación, a su vez, puede tener un aspecto más social: que los estudiantes pongan tips y consejos sobre las materias.
+Además, podría recibir \textit{feedback} sobre los que ya cursaron, los horarios, las comodidades, la calidad de enseñanza, etc.
 
 \subsection[Integración con Guaraní]{Integración con Guaraní}
 
@@ -35,7 +35,7 @@ Sería muy conveniente poder conectar el Núcleo con Guaraní a través de una A
 
 \subsection[Integración con sistema de encuestas de inscripción]{Integración con sistema de encuestas de inscripción}
 
-El sistema actual que utilizan algunas carreras de la UNQ para consultar las posibles inscripciones de los estudiantes debería ser integrado al núcleo para que consuma datos, y luego debería enviar los resultado para luego con esa información mostrar métricas a los directores de carreras. 
+El sistema actual que utilizan algunas carreras de la UNQ para consultar las posibles inscripciones de los estudiantes debería ser integrado al núcleo para que consuma datos, y luego debería enviar los resultados para luego con esa información mostrar métricas a los directores de carreras. 
 
 
 \subsection[GraphQL en el núcleo]{GraphQL en el núcleo}
@@ -44,7 +44,7 @@ GraphQL es un lenguaje de queries para APIs, donde los clientes definen precisam
 
 \subsection[Proveedor de identidad (IDP)]{Proveedor de identidad (IDP)}
 
-Dado que el potencial de extensión es amplio, una buena forma de desligarle responsabilidades al núcleo es crear un proveedor de identidad. En lugar de los usuarios identificarse ante el núcleo y que este les provea un token, debería hacerlo un servicio independiente que tenga conocimiento de todos los usuarios, y éste se encargue de validar quién puede ingresar y quién no, y qué permisos tiene.
+Dado que el potencial de extensión es amplio, una buena forma de desligarle responsabilidades al núcleo es crear un proveedor de identidad. En lugar de los usuarios identificarse ante el núcleo y que éste les provea un token, debería hacerlo un servicio independiente que tenga conocimiento de todos los usuarios, y éste se encargue de validar quién puede ingresar y quién no, y qué permisos tiene.
 
 \subsection[Acceso Centralizado]{Acceso Centralizado}
 
