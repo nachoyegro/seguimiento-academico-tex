@@ -34,7 +34,7 @@ Esta prueba duró 5 minutos y los resultados se muestran a continuación.
 \subsubsection{Resultados generales de la prueba}
 
 
-Los resultados generales, como muestra la tabla ~\ref{tab:100u_5m_gen}, indican que durante los 5 minutos que duró la prueba se realizaron 16.997 requests en total, y el núcleo pudo responder sin ningún error.
+Los resultados generales, como muestra la Tabla ~\ref{tab:100u_5m_gen}, indican que durante los 5 minutos que duró la prueba se realizaron 16.997 requests en total, y el núcleo pudo responder sin ningún error.
 
 El tiempo promedio de respuesta fue de 1043.79ms.
 
@@ -60,7 +60,7 @@ El tiempo promedio de respuesta fue de 1043.79ms.
 \subsubsection{Resultados sobre el uso de recursos durante la prueba}
 
 Para evaluar el consumo de recursos, se utilizó el comando \textit{docker stats} que realiza una transmisión en vivo de los recursos que van consumiendo los contenedores.
-En promedio utilizó un 68\% del CPU y 55MB de memoria RAM (tabla ~\ref{tab:100u_5m_rec}).
+En promedio utilizó un 68\% del CPU y 55MB de memoria RAM (Tabla ~\ref{tab:100u_5m_rec}).
 
 
 \begin{table}[!htbp]
@@ -84,7 +84,7 @@ Como se explicó anteriormente, esta prueba tiene en cuenta el tiempo que tardan
 
 Para esta prueba, el APDEX fue de 0.995, lo cual es casi perfecto (el valor máximo es 1) dentro de los parámetros elegidos.
 
-La tabla ~\ref{tab:100u_5m_apdex} muestra este resultado.
+La Tabla ~\ref{tab:100u_5m_apdex} muestra este resultado.
 
 \begin{table}[!htbp]
     \centering
@@ -133,7 +133,7 @@ El tiempo promedio de respuesta fue de 4409.80ms., lo cual significa un incremen
 
 \subsubsection{Resultados sobre el uso de recursos durante la prueba}
 
-Como muestra la tabla ~\ref{tab:300u_10m_rec}, hubo un incremento del uso promedio de CPU, aunque el uso de memoria se mantuvo igual.
+Como muestra la Tabla ~\ref{tab:300u_10m_rec}, hubo un incremento del uso promedio de CPU, aunque el uso de memoria se mantuvo igual.
 
 \begin{table}[!htbp]
     \centering
@@ -151,7 +151,7 @@ Como muestra la tabla ~\ref{tab:300u_10m_rec}, hubo un incremento del uso promed
 
 Luego de ver el tiempo promedio de respuesta de los requests, es esperable que el APDEX baje considerablemente.
 
-En este caso fue de 0.361 (tabla~\ref{tab:300u_10m_apdex}), lo que significa que esa magnitud de usuarios haciendo pedidos no genera conformidad dentro de los parámetros establecidos para la satisfacción de los usuarios.
+En este caso fue de 0.361 (Tabla~\ref{tab:300u_10m_apdex}), lo que significa que esa magnitud de usuarios haciendo pedidos no genera conformidad dentro de los parámetros establecidos para la satisfacción de los usuarios.
 
 \begin{table}[!htbp]
     \centering
@@ -172,7 +172,7 @@ Esta prueba duró 10 minutos y los resultados se muestran a continuación.
 
 \subsubsection{Resultados generales de la prueba}
 
-Al igual que en las pruebas anteriores, se tuvo en cuenta los resultados provistos por jMeter (tabla~\ref{tab:300u_10m_2i_gen}).
+Al igual que en las pruebas anteriores, se tuvo en cuenta los resultados provistos por jMeter (Tabla~\ref{tab:300u_10m_2i_gen}).
 
 Estos resultados muestran un incremento en la cantidad de pedidos que pudo resolver el núcleo, pasando de los 20.918 pedidos a 33.499.
 
@@ -199,7 +199,7 @@ Estos resultados también muestran una mejora en el tiempo promedio de respuesta
 
 \subsubsection{Resultados sobre el uso de recursos durante la prueba}
 
-La tabla~\ref{tab:300u_10m_2i_rec} muestra que el consumo de CPU por instancia bajó de 88\% a 67\% y 68\% para cada una de las respectivas instancias. 
+La Tabla~\ref{tab:300u_10m_2i_rec} muestra que el consumo de CPU por instancia bajó de 88\% a 67\% y 68\% para cada una de las respectivas instancias. 
 
 El consumo de memoria se mantuvo en los mismos parámetros, aunque al ser dos instancias el consumo se duplicó. Igualmente, son valores bajos con respecto a la arquitectura provista.
 \begin{table}[!htbp]

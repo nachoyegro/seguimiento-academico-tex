@@ -77,7 +77,7 @@ Estos importadores son:
 
 \subsection{API}
 
-Se diseñó una API para consultar datos a través de distintas URIs (tabla ~\ref{tab:tabla_api}), para las cuales se necesita de un token (tabla ~\ref{tab:tabla_token}).
+Se diseñó una API para consultar datos a través de distintas URIs (Tabla ~\ref{tab:tabla_api}), para las cuales se necesita de un token (Tabla ~\ref{tab:tabla_token}).
 Dicho token es de la forma:
 
 \textit{eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.} \break 
@@ -250,7 +250,14 @@ Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de
 
 Dada una materia, informa el detalle de estudiantes aprobados, teniendo en cuenta la forma de aprobación. Las formas de aprobacion son:
 
->> Formas de aprobación
+\begin{outline}
+    \2 Equivalencia equivalente
+    \2 Promoción en otra carrera
+    \2 Promoción
+    \2 Equivalencia
+    \2 Examen equivalente
+    \2 Examen
+\end{outline}
 
 \paragraph{Dispersión de notas}\mbox{}\\
 
@@ -279,7 +286,7 @@ Parámetros adicionales: carrera, inicio, fin, plan \\
 
 Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a las diferentes áreas de la carrera y el plan que se está analizando, dentro del período elegido.
 
-Cada carrera tiene sus propias áreas. En particular, y tomado a forma de ejemplo, las áreas de la Licenciatura en Informática se muestran en la tabla ~\ref{tab:tabla_areas}.
+Cada carrera tiene sus propias áreas. En particular, y tomado a forma de ejemplo, las áreas de la Licenciatura en Informática se muestran en la Tabla ~\ref{tab:tabla_areas}.
 
 \begin{table}[!htbp]
     \centering
@@ -305,7 +312,7 @@ Parámetros adicionales: carrera, inicio, fin, plan \\
 
 Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a los diferentes núcleos de la carrera y el plan que se está analizando, dentro del período elegido.
 
-Cada carrera tiene sus propios núcleos. En particular, y tomado a forma de ejemplo, los núcleos de la Licenciatura en Informática se muestran en la tabla ~\ref{tab:tabla_nucleos}.
+Cada carrera tiene sus propios núcleos. En particular, y tomado a forma de ejemplo, los núcleos de la Licenciatura en Informática se muestran en la Tabla ~\ref{tab:tabla_nucleos}.
 
 \begin{table}[!htbp]
     \centering
@@ -682,3 +689,5 @@ El código será licenciado bajo una licencia libre avalada por la OSI (Open Sou
 FSF (Free Software Foundation). El código fuente será subido de forma pública a un repositorio
 de código online de la UNQ para el libre acceso de todo aquel que desee utilizar, estudiar,
 modificar, copia, redistribuir, mezclar, publicar o sublicenciar el software en cuestión.
+
+\section[Conclusiones]{Conclusiones}

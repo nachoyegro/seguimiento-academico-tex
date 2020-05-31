@@ -159,6 +159,8 @@ Desde la perspectiva de microservicios, cuando uno de los servicios tenga una fa
 En un sistema monolítico, todo se escala junto. Si sólo se necesitara que un servicio determinado tenga más recursos, estaría dándole más recursos a todo el sistema.
 En cambio, con microservicios, si en un determinado momento se necesita, por ejemplo, que el servicio de análisis de datos procese más peticiones se podría escalar sólo ese servicio teniendo dos instancias (o más) de esa parte del sistema, dejando los otros módulos corriendo con hardware menos poderoso, acorde a sus necesidades.
 
+La Figura \ref{fig:microescala} muestra cómo podría ser escalado el sistema en caso de ser necesario. El Núcleo muestra 4 instancias, el análisis dos y la visualización una sola instancia, a modo de ejemplo.
+
 \begin{figure}[h!]
   \centering
     \includegraphics[scale=0.7]{images/escalamiento.png}
@@ -454,25 +456,24 @@ Los contenedores y las máquinas virtuales tienen un aislamiento y asignación d
 \begin{figure}[h!]
   \centering
     \includegraphics[scale=0.7]{images/containers.png}
-  \captionof{figure}{Contenedor vs VM}
+  \captionof{figure}{Estructura de contenedores}
   \label{fig:contvm}
 \end{figure}
 
 \break
 
-Los contenedores son una abstracción de la capa de aplicación que empaqueta el código y las dependencias juntos. Múltiples contenedores pueden correr en la misma máquina compartiendo el kernel del sistema operativo junto con otros contenedores, todos corriendo de forma aislada. Los contenedores ocupan menos espacio que las VMs.
+Los contenedores son una abstracción de la capa de aplicación que empaqueta el código y las dependencias juntos. Múltiples contenedores pueden correr en la misma máquina compartiendo el kernel del sistema operativo junto con otros contenedores, todos corriendo de forma aislada (Figura \ref{fig:contvm}). Además, los contenedores ocupan menos espacio que las VMs.
 
 \begin{figure}[h!]
   \centering
     \includegraphics[scale=0.7]{images/vms.png}
-  \captionof{figure}{Máquinas virtuales}
+  \captionof{figure}{Estructura de Máquinas virtuales}
   \label{fig:vm}
 \end{figure}
 
 \break
 
-Las máquinas virtuales (VMs) son una abstracción del hardware físico, transformando un servidor en múltiples servidores. El hypervisor permite que múltiples VMs corran en una misma máquina. Cada VM incluye una copia de un sistema operativo, la aplicación, los binarios y bibliotecas, ocupando decenas de GBs.
-
+Las máquinas virtuales (VMs) son una abstracción del hardware físico, transformando un servidor en múltiples servidores. El \textit{hypervisor} permite que múltiples VMs corran en una misma máquina (como muestra la Figura \ref{fig:vm}). Cada VM incluye una copia de un sistema operativo, la aplicación, los binarios y bibliotecas, ocupando decenas de GBs. 
 
 \subsection[Docker Compose]{Docker Compose}
 
@@ -530,3 +531,12 @@ El balance de carga es en definitiva un \textit{reverse proxy}, con tres diferen
 \1 Los balanceadores de carga usualmente operan en la capa 7 (HTTP) o en la capa 4 (TCP) del modelo OSI, cuando típicamente sólo operaríamos en la capa 7 usando un reverse proxy de aplicaciones modernas.
 \1 La escala es crítica para los balanceadores de carga: en sitios ocupados, pueden ver 20 veces la cantidad de tráfico que recibe un servidor de aplicación. Por ejemplo, un servidor de aplicaciones potente solo necesitará manejar entre 100 y 200 solicitudes por segundo, mientras que un balanceador de carga puede recibir más de 10,000 solicitudes por segundo.
 \end{outline}
+
+
+\section[Conclusiones]{Conclusiones}
+
+Luego de investigar las diferentes tecnologías, se decidió que la mejor solución era desarrollar tres aplicaciones diferentes. Por un lado, un núcleo que se encargase de manejar los datos y servirlos mediante una API Rest. Esto sería beneficioso para el seguimiento académico pero también para que estos datos puedan ser consultados por aplicaciones futuras. 
+
+Luego, para el análisis y visualización de los datos se decidió separarlo en dos aplicaciones diferentes. La primera, desarrollada con Flask, que conjuntamente con Pandas y Numpy se encargará de analizar y servir los datos analizados. La segunda, desarrollada con React, tendrá la tarea de mostrar los datos analizados.
+
+La implementación de estas tres aplicaciones se detalla en el capítulo siguiente.
