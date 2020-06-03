@@ -691,3 +691,13 @@ de código online de la UNQ para el libre acceso de todo aquel que desee utiliza
 modificar, copia, redistribuir, mezclar, publicar o sublicenciar el software en cuestión.
 
 \section[Conclusiones]{Conclusiones}
+
+Se desarrollaron tres aplicaciones independientes, las cuales se comunican a través de pedidos REST. Cada uno de estos pedidos lleva en su encabezado un token JWT. Dicho token tiene información como la carreras que tiene el usuario asignadas para ver.
+
+En primer lugar, el Núcleo Académico brinda datos académicos a quienes tengan permisos de visualizar, y permite crear, editar y borrar a todo aquel que disponga de dichos permisos.
+
+Gracias al Núcleo Académico fue posible crear una aplicación de análisis y otra de visualización, llegando así a cumplir con los requerimientos iniciales.
+
+Cada una de estas aplicaciones se encuentra aislada dentro de su propio contenedor de Docker, y estos contenedores pueden ser incrementados a medida que sea necesario.
+
+En el siguiente capitulo se van a desarrollar pruebas del funcionamiento de las aplicaciones con distintos parámetros de demanda.
