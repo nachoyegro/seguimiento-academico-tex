@@ -3,7 +3,8 @@
 
 Las funcionalidades identificadas en los requerimientos del Capitulo 2 se implementaron en una aplicación llamada Seguimiento Académico usando la arquitectura y tecnologías descriptas en el Capitulo 3.
 La aplicación Seguimiento Académico se conecta a una aplicación independiente que se encarga del análisis de los datos. Estos datos son obtenidos gracias a una tercer aplicación independiente llamada “Núcleo Académico”.
-La Figura \ref{fig:analisis-nucleo} muestra el funcionamiento de estas tres aplicaciones.
+
+La Figura \ref{fig:analisis-datos} muestra el funcionamiento de estas tres aplicaciones.
 
 
 \begin{figure}[H]
@@ -87,7 +88,7 @@ Dicho token es de la forma:
 \textit{FyZSJdXSwidXNlcm5hbWUiOiJhZG1pbiJ9}.\break 
 \textit{xWWi-sDFQ6I-CK0xC7tmkTw1mXRmMhFFse6\_qnKBiaE}
 
-\break
+
 El \textit{Header} del token tiene la siguiente información:
 \begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
 {
@@ -95,7 +96,7 @@ El \textit{Header} del token tiene la siguiente información:
 "alg": "HS256"
 }
 \end{minted}
-\break
+
 Para el caso del \textit{Payload}, se tiene la siguiente información indicando precisamente qué carreras puede consultar el usuario:
 \begin{minted}[frame=single, framesep=3mm, linenos=true, xleftmargin=21pt, tabsize=4]{js}
 {
