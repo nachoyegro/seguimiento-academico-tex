@@ -198,7 +198,9 @@ Esta es la configuración para una sola instancia, sin límite de CPU ni memoria
           name: seguimiento-academico
   \end{minted}
 
-\section[Análisis de Datos]{Análisis de Datos}
+\section[Análisis y Visualización de Datos]{Análisis y Visualización de Datos}
+
+\subsection{Análisis de datos}
 
 Para poder obtener información relevante de las carreras, materias y estudiantes, se debe hacer un análisis de los datos recopilados históricamente.
 
@@ -206,7 +208,7 @@ Si bien el núcleo provee una gran cantidad de datos, éstos necesitan una manip
 
 El objetivo principal de este módulo es de la obtención de los datos mediante una API Rest, la manipulación y el procesamiento de esos datos. Una vez terminado este proceso, sirve los resultados mediante una API Rest, que es consumida por un tercero para su visualización.
 
-\subsection{Especificaciones}
+\subsubsection{Especificaciones}
 
 El módulo de análisis de datos está construido con Python 3.6. El análisis de los datos se hizo con Pandas y los resultados son servidos gracias a Flask a través de una API REST.
 
@@ -221,215 +223,14 @@ La Figura ~\ref{fig:analisis-nucleo} muestra el rol de este módulo y su funcion
 \end{figure}
 
 
-\subsection{Obtención de los datos}
+\subsubsection{Obtención de los datos}
 
 Los datos son obtenidos a través de pedidos a la API del Núcleo. Estos datos llegan en forma de JSON y son transformados a DataFrame o Series (estructuras de datos de Pandas). 
 
 Dado que los datos llegan de forma de recursos independientes, la mayor parte de los análisis requieren que estos datos sean unidos gracias a las funcionalidades de los DataFrames (de forma similar a los join de SQL).
 
-\subsection{Análisis}
+\subsection[Visualización de los datos analizados]{Visualización de los datos analizados}
 
-Una vez terminados los procesos de obtención, limpiado y union de los datos, se empieza el proceso de análisis.
-
-Se realizaron análisis de diferentes magnitudes, basado en la cantidad de procesamiento que requieren. 
-\subsubsection{Análisis sobre materias}
-
-\paragraph{Datos basicos históricos} \mbox{}\\
-
-URI: /materias/<cod\_materia>/basicos \\
-
-Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
-
-Dada una materia, analiza cuántos estudiantes aprobaron, cuántos estudiantes desaprobaron, cuántos estudiantes quedaron ausentes y cuántos estudiantes faltan aprobarla dentro de un período de tiempo.
-
-\paragraph{Detalle de aprobación}\mbox{}\\
-
-URI: /materias/<cod\_materia>/detalle-aprobados \\
-
-Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
-
-Dada una materia, informa el detalle de estudiantes aprobados, teniendo en cuenta la forma de aprobación. Las formas de aprobacion son:
-
-\begin{outline}
-    \2 Equivalencia equivalente
-    \2 Promoción en otra carrera
-    \2 Promoción
-    \2 Equivalencia
-    \2 Examen equivalente
-    \2 Examen
-\end{outline}
-
-\paragraph{Dispersión de notas}\mbox{}\\
-
-URI: /materias/<cod\_materia>/dispersion-notas \\
-
-Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
-
-Dada una materia, se hace un análisis de la dispersión de las notas dentro de un período. Teniendo en cuenta estudiantes, sus notas y el promedio de ese estudiante.
-
-\paragraph{Número de recursantes}\mbox{}\\
-
-URI: /materias/<cod\_materia>/recursantes \\
-
-Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
-
-Dada una materia, analiza qué estudiantes son recursantes y cuantas veces.
-
-
-\subsubsection{Análisis sobre estudiantes}
-
-\paragraph{Porcentaje de aprobación por área}\mbox{}\\
-
-URI: /alumnos/<legajo>/porcentajes-areas \\
-
-Parámetros adicionales: carrera, inicio, fin, plan \\
-
-Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a las diferentes áreas de la carrera y el plan que se está analizando, dentro del período elegido.
-
-Cada carrera tiene sus propias áreas. En particular, y tomado a forma de ejemplo, las áreas de la Licenciatura en Informática se muestran en la Tabla ~\ref{tab:tabla_areas}.
-
-\begin{table}[!htbp]
-    \centering
-    \makegapedcells
-    \begin{tabular}{|c|c|}
-    \hline
-    Nombre \\ \hline
-    Programación \\ \hline
-    Sistemas Informáticos \\ \hline
-    Procesos Informáticos\\ \hline
-    Desarrollo de Software \\ \hline
-    Teoría de la Computación \\ \hline
-    \end{tabular}
-    \caption{Áreas de la Licenciatura en Informática}
-    \label{tab:tabla_areas}
-\end{table}
-
-\paragraph{Porcentaje de aprobación por núcleo}\mbox{}\\
-
-URI: /alumnos/<legajo>/porcentajes-nucleos \\
-
-Parámetros adicionales: carrera, inicio, fin, plan \\
-
-Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a los diferentes núcleos de la carrera y el plan que se está analizando, dentro del período elegido.
-
-Cada carrera tiene sus propios núcleos. En particular, y tomado a forma de ejemplo, los núcleos de la Licenciatura en Informática se muestran en la Tabla ~\ref{tab:tabla_nucleos}.
-
-\begin{table}[!htbp]
-    \centering
-    \makegapedcells
-    \begin{tabular}{|c|c|}
-    \hline
-    Código & Nombre \\ \hline
-    I & Introductorio \\ \hline
-    B & Básico\\ \hline
-    A & Avanzado \\ \hline
-    C & Complementario/Orientativo \\ \hline
-    \end{tabular}
-    \caption{Núcleos de la Licenciatura en Informática}
-    \label{tab:tabla_nucleos}
-\end{table}
-
-
-\paragraph{Notas}\mbox{}\\
-
-URI: /alumnos/<legajo>/notas \\
-
-Parámetros adicionales: carrera, inicio, fin, plan \\
-
-Dado un estudiante, se obtienen las diferentes notas que tuvo a lo largo de sus cursadas.
-
-\paragraph{Porcentaje de avance de carrera}\mbox{}\\
-
-URI: /alumnos/<legajo>/porcentaje-carrera \\
-
-Parámetros adicionales: carrera, inicio, fin, plan \\
-
-Dado un legajo de estudiante, se realiza un análisis para determinar el porcentaje de avance de la carrera, según el plan que se analice. Dado que cada plan tiene una cantidad distinta de materias, este dato cambia según el plan que se analice.
-
-\paragraph{Promedio por períodos}\mbox{}\\
-
-URI: /alumnos/<legajo>/scores \\
-
-Parámetros adicionales: carrera, inicio, fin, plan \\
-
-Dado un estudiante, se calcula cuál fue su \textit{score} por cada período. Es decir, su rendimiento semestral. 
-
-El \textit{score} se calcula sacando un promedio de sus notas en un semestre. Las materias que sólo se distinguen entre “Aprobado” y “Desaprobado” y no disponen de una nota, se les asigna una nota para sacar este promedio.
-Las materias con nota “Aprobado” son consideradas como un 7, y las materias con nota “Desaprobado” son consideradas como un 3. Entonces, el \textit{score} no es un promedio preciso, sino una estipulación de lo que fué su rendimiento en ese período.
-
-Este \textit{score} es útil para analizar el rendimiento de un estudiante y puede servirle a las carreras para tomar decisiones tempranas.
-
-\subsubsection{Análisis sobre carreras}
-
-\paragraph{Cantidad de estudiantes por semestre}\mbox{}\\
-
-URI: /carreras/<carrera>/alumnos \\
-
-Dada una carrera, se obtiene un listado de cantidad de inscriptos por semestre
-
-
-\paragraph{Datos generales por cohorte}\mbox{}\\
-
-URI: /carreras/<carrera>/cantidades-alumnos \\
-
-Dada una carrera, se obtiene un listado de inscriptos, cursantes, graduados y postulantes por cohorte.
-
-
-\paragraph{Ingresantes por cohorte}\mbox{}\\
-
-URI: /carreras/<carrera>/cantidades-ingresantes \\
-
-Dada una carrera, se obtiene la cantidad de ingresantes separadas por año.
-
-
-\paragraph{Cantidad de cursantes actual}\mbox{}\\
-
-URI: /carreras/<carrera>/cursantes-actual \\
-
-Dada una carrera, se obtiene la cantidad de cursantes actual.
-
-
-\paragraph{Cantidad de ingresantes actual}\mbox{}\\
-
-URI: /carreras/<carrera>/ingresantes-actual \\
-
-Dada una carrera, se obtiene la cantidad de ingresantes.
-
-
-\paragraph{Cantidad total de graduados} \mbox{}\\
-
-URI: /carreras/<carrera>/graduados-total \\
-
-Dada una carrera, se obtiene el total de graduados.
-
-
-\paragraph{Dispersión de scores y promedios}\mbox{}\\
-URI: /carreras/<carrera>/dispersion-score-promedio \\
-
-El objetivo de este análisis es el agrupar estudiantes en base al \textit{score} y al promedio. Mostrando grupos de interés sobre los cuales se podrán implementar acciones específicas.
-
-\paragraph{Materias que demoran la formación}\mbox{}\\
-
-URI: /carreras/<carrera>/materias-traba \\
-
-Dada una carrera, se quiere analizar qué materias son las que demoran la formación de los estudiantes. 
-Para poder realizar este análisis, se necesitaron los siguientes datos:
-\begin{outline}
-\1 Índice de aprobación de una materia (cantidad de aprobados / cantidad total de cursantes).
-\1 Cuántas materias obligatorias dependen de ella.
-\end{outline}
-
-Luego de calcular estos datos materia por materia, se calcula un \textit{score}. Este \textit{score} determina qué materia puede llegar a demorar la carrera de un estudiante.
-
-\begin{align*}
-  Score = (1 - IndiceAprobacion) * CantidadObligatoriasDependientes\\
-\end{align*}
-
-Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 materias que son obligatorias y dependen de ésta para ser cursadas, tendrá un score de 2.5 ((1 - 0.75) * 10).
-
-
-
-\section[Visualización de los datos analizados]{Visualización de los datos analizados}
 
 Si bien la parte de análisis de datos quedó cubierta, era necesario poder visualizarlos de forma gráfica. Por esta razón surgió la necesidad de crear una nueva aplicación independiente del núcleo y del análisis de datos.
 
@@ -454,7 +255,7 @@ Estos datos se desprenden del módulo de análisis, y se agrupan de la siguiente
 Cada uno de estos grupos de datos tiene su propia pantalla de tipo reporte, donde el usuario ingresa los parámetros necesarios para cada reporte.
 
 
-\subsection{Especificaciones}
+\subsubsection{Especificaciones}
 
 Seguimiento Académico está construido con React 16.8 y se usó la biblioteca recharts para generar gráficos. Además, se uso el framework Material UI para el renderizado de elementos de la interfáz de usuario y diferentes tablas.
 Este módulo realiza pedidos a la aplicación de análisis de datos, los cuales tienen que tener su correspondiente token para ser aceptados.
@@ -463,7 +264,7 @@ Cuando un usuario ingresa, se hace una autenticación con el núcleo. Esta auten
 
 El gráfico ~\ref{fig:analisis-datos} muestra el rol de este módulo y su funcionamiento con respecto al de análisis de datos y al núcleo.
 
-\subsection{Obtención de los datos}
+\subsubsection{Obtención de los datos}
 
 Los datos son obtenidos a través de pedidos a la API del módulo de análisis de datos gracias a Axios.
 Axios está basado en \textit{promises}, con lo cual se puede aprovechar las ventajas de \textit{async} y \textit{await} para un código asincrónico más legible.
@@ -473,7 +274,7 @@ Estos pedidos se realizan a través de llamadas \textit{ajax}, lo cual quiere de
 Estos datos llegan como JSON y son procesados para ser mostrados de forma correcta.
 
 
-\subsection{Visualización de datos}
+\subsubsection{Pantallas principales}
 
 La aplicación Seguimiento Académico tiene 5 pantallas principales:
 \begin{outline}
@@ -521,99 +322,14 @@ La aplicación Seguimiento Académico tiene 5 pantallas principales:
 \end{figure}
 
 
-\subsubsection{Visualización por carrera}
 
-Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles. Una vez que el formulario fue completado, se muestran los siguientes gráficos.
+\subsubsection{Análisis y visualización sobre materias}
 
-\paragraph{Cantidad actual de cursantes} \mbox{}\\
-La cantidad actual de cursantes de la carrera se muestra en forma de tarjeta informativa (Figura~\ref{fig:sa-cursantes}). 
+\paragraph{Datos básicos históricos} \mbox{}\\
 
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-cursantes.png}
-  \captionof{figure}{Cantidad de cursantes}
-  \label{fig:sa-cursantes}
-\end{figure}
+Dada una materia, analiza cuántos estudiantes aprobaron, cuántos estudiantes desaprobaron, cuántos estudiantes quedaron ausentes y cuántos estudiantes faltan aprobarla dentro de un período de tiempo.
 
-\paragraph{Cantidad actual de ingresantes} \mbox{}\\
-La cantidad actual de ingresantes de la carrera se muestra en forma de tarjeta informativa (Figura~\ref{fig:sa-ingresantes}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresantes.png}
-  \captionof{figure}{Cantidad de ingresantes}
-  \label{fig:sa-ingresantes}
-\end{figure}
-
-\paragraph{Cantidad total de graduados} \mbox{}\\
-La cantidad total de graduados de la carrera se muestra en forma de tarjeta informativa (Figura~\ref{fig:sa-graduados}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-graduados.png}
-  \captionof{figure}{Cantidad de graduados}
-  \label{fig:sa-graduados}
-\end{figure}
-
-\paragraph{Dispersión de estudiantes} \mbox{}\\
-El siguiente gráfico muestra la dispersión de los estudiantes con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los estudiantes que se desempeñaron por encima de su historial y cuáles no (Figura~\ref{fig:sa-dispersion}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-dispersion.png}
-  \captionof{figure}{Gráfico de dispersión}
-  \label{fig:sa-dispersion}
-\end{figure}
-
-\paragraph{Cantidad de ingresos por semestre} \mbox{}\\
-El siguiente gráfico es en forma de \textit{área}, y muestra la cantidad de ingresos semestrales histórico de la carrera. De esta forma, se puede observar en qué momento hubo picos de ingresos y en qué momentos hubo menos (Figura~\ref{fig:sa-ingresos-semestre}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresossemestre.png}
-  \captionof{figure}{Ingresos por semestre}
-  \label{fig:sa-ingresos-semestre}
-\end{figure}
-
-\paragraph{Alumnos por cohorte} \mbox{}\\
-La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de cursantes hubo, la cantidad de ingresantes y la cantidad de graduados  (Figura~\ref{fig:sa-alumnos-cohorte}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-alumnos-cohorte.png}
-  \captionof{figure}{Tabla de estudiantes por cohorte}
-  \label{fig:sa-alumnos-cohorte}
-\end{figure}
-
-\paragraph{Ingresantes por cohorte} \mbox{}\\
-La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de ingresantes hubo  (Figura~\ref{fig:sa-ingresantes-cohorte}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresantes-cohorte.png}
-  \captionof{figure}{Tabla de ingresantes por cohorte}
-  \label{fig:sa-ingresantes-cohorte}
-\end{figure}
-
-\paragraph{Materias que demoran la formación} \mbox{}\\
-La siguiente tabla muestra un puntaje por materia en base a su porcentaje de aprobación y sobre la dependencia que tienen otras materias sobre ésta para ser cursadas  (Figura~\ref{fig:sa-materias-traba}).
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-materias-traba.png}
-  \captionof{figure}{Tabla de ingresantes por cohorte}
-  \label{fig:sa-materias-traba}
-\end{figure}
-
-
-\subsubsection{Visualización por materia}
-
-Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles, luego ingresa el código de materia a analizar y una fecha de inicio y fin. De esta forma se analizará solo en el rango de fechas que se eligió.
-
-Una vez que el formulario fue completado, se muestran los siguientes gráficos.
-
-\paragraph{Estadísticas básicas de materia} \mbox{}\\
-El siguiente gráfico muestra en forma de columnas los resultados de los estudiantes en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla  (Figura~\ref{fig:sa-datos-basico}).
+La Figura \ref{fig:sa-datos-basico} muestra un gráfico en forma de columnas donde se visualiza los resultados de los estudiantes en el rango seleccionado. Se puede observar la cantidad de aprobados, ausentes, desaprobados y cuántos faltan cursarla.
 
 \begin{figure}[H]
   \centering
@@ -622,8 +338,15 @@ El siguiente gráfico muestra en forma de columnas los resultados de los estudia
   \label{fig:sa-datos-basico}
 \end{figure}
 
-\paragraph{Detalle de aprobación} \mbox{}\\
-El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los estudiantes esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un exámen equivalente, cuántos con una equivalencia equivalente y cuántos con exámen  (Figura~\ref{fig:sa-detalle-aprobacion}).
+Estos datos son obtenidos a través del módulo de análisis de datos con los siguientes datos.
+
+URI: /materias/<cod\_materia>/basicos \\
+
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
+
+\paragraph{Detalle de aprobación}\mbox{}\\
+
+La Figura~\ref{fig:sa-detalle-aprobacion} muestra un gráfico en forma de columnas que detalla de qué forma aprobaron los estudiantes esa materia en el rango seleccionado. Se puede observar cuántos promocionaron en otra carrera, cuántos promocionaron, cuántos aprobaron un examen equivalente, cuántos con una equivalencia equivalente y cuántos con examen.
 
 \begin{figure}[H]
   \centering
@@ -632,28 +355,72 @@ El siguiente gráfico muestra en forma de columnas de qué forma aprobaron los e
   \label{fig:sa-detalle-aprobacion}
 \end{figure}
 
-\paragraph{Dispersión de notas con respecto al promedio} \mbox{}\\
-Este gráfico muestra en forma de dispersión la evolución de los estudiantes con respecto a su promedio.
+La forma en que obtiene los datos se hace a través de la siguiente URI.
 
-\subsubsection{Visualización por estudiante}
-Se dispone de un formulario para realizar un reporte, donde el usuario puede seleccionar entre sus carreras disponibles, luego ingresa el legajo del estudiante a analizar, un plan de estudios, y una fecha de inicio y fin. De esta forma, se analizará sólo en el rango de fechas que se eligió.
+URI: /materias/<cod\_materia>/detalle-aprobados \\
 
-Una vez que el formulario fue completado, se muestran los siguientes gráficos.
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
 
-\paragraph{Desempeño del estudiante} \mbox{}\\
-El siguiente gráfico muestra el desempeño del estudiante semestralmente dentro del rango seleccionado  (Figura~\ref{fig:sa-detalle-aprobacion}).
+Las distintas formas de aprobación son:
+
+\begin{outline}
+    \2 Equivalencia equivalente
+    \2 Promoción en otra carrera
+    \2 Promoción
+    \2 Equivalencia
+    \2 Examen equivalente
+    \2 Examen
+\end{outline}
+
+\paragraph{Dispersión de notas}\mbox{}\\
+
+Dada una materia, se hace un análisis de la dispersión de las notas dentro de un período. Teniendo en cuenta estudiantes, sus notas y el promedio de ese estudiante.
+
+La Figura \ref{fig:sa-dispersion-notas} muestra de forma gráfica este análisis. El eje vertical muestra el promedio general del alumno. Por su parte, el eje horizontal muestra la nota que sacó.
+
 \begin{figure}[H]
   \centering
-    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-desempeño.png}
-  \captionof{figure}{Detalle de aprobación}
-  \label{fig:sa-detalle-aprobacion}
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-dispersion-notas.png}
+  \captionof{figure}{Dispersión de notas con respecto al promedio}
+  \label{fig:sa-dispersion-notas}
 \end{figure}
 
-\paragraph{Porcentaje de carrera} \mbox{}\\
-Se muestra el porcentaje de aprobación de la carrera en forma de tarjeta informativa.
+La forma en que obtiene los datos se hace a través de la siguiente URI:
 
-\paragraph{Porcentajes de aprobación por área} \mbox{}\\
-El siguiente gráfico de radar muestra los porcentajes de aprobación del estudiante dentro de las áreas de la carrera (Figura~\ref{fig:sa-porcentaje-area}).
+URI: /materias/<cod\_materia>/dispersion-notas \\
+
+Parámetros opcionales: inicio: yyyy-mm-dd, fin: yyyy-mm-dd, carrera: código de la carrera. \\
+
+
+\paragraph{Recursantes}\mbox{}\\
+
+Dada una materia, analiza qué estudiantes son recursantes y cuantas veces.
+
+La Figura \ref{fig:sa-recursantes} muestra una tabla con los recursantes dentro de una materia teniendo en cuenta las inscripciones de la fecha pedida.
+
+Como el reporte de materias tiene fecha de inicio y fecha de fin, para este análisis se tiene en cuenta el semestre de la fecha fin. Es decir, si se pide un análisis hasta la fecha 12/12/2019, se calcularán los recursantes de la materia pedida durante las inscripciones del segundo semestre del 2019.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-recursantes.png}
+  \captionof{figure}{Recursantes}
+  \label{fig:sa-recursantes}
+\end{figure}
+
+Los datos son obtenidos a través de la URI:
+
+URI: /materias/<cod\_materia>/recursantes \\
+
+Parámetros opcionales: fecha: yyyy-mm-dd
+
+
+\subsubsection{Análisis sobre estudiantes}
+
+\paragraph{Porcentaje de aprobación por área}\mbox{}\\
+
+Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a las diferentes áreas de la carrera y el plan que se está analizando, dentro del período elegido.
+
+La Figura~\ref{fig:sa-porcentaje-area} visualiza un gráfico de radar que muestra los porcentajes de aprobación del estudiante dentro de las áreas de la carrera ().
 
 \begin{figure}[H]
   \centering
@@ -662,7 +429,34 @@ El siguiente gráfico de radar muestra los porcentajes de aprobación del estudi
   \label{fig:sa-porcentaje-area}
 \end{figure}
 
-\paragraph{Porcentajes de aprobacion por núcleo} \mbox{}\\
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /alumnos/<legajo>/porcentajes-areas \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Cada carrera tiene sus propias áreas. En particular, y tomado a forma de ejemplo, las áreas de la Licenciatura en Informática se muestran en la Tabla ~\ref{tab:tabla_areas}.
+
+\begin{table}[!htbp]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|}
+    \hline
+    Nombre \\ \hline
+    Programación \\ \hline
+    Sistemas Informáticos \\ \hline
+    Procesos Informáticos\\ \hline
+    Desarrollo de Software \\ \hline
+    Teoría de la Computación \\ \hline
+    \end{tabular}
+    \caption{Áreas de la Licenciatura en Informática}
+    \label{tab:tabla_areas}
+\end{table}
+
+\paragraph{Porcentaje de aprobación por núcleo}\mbox{}\\
+
+Dado un estudiante, se hace un análisis de los porcentajes de aprobación que tiene con respecto a los diferentes núcleos de la carrera y el plan que se está analizando, dentro del período elegido.
+
 El siguiente gráfico de radar muestra los porcentajes de aprobación del estudiante dentro de los núcleos de la carrera (Figura~\ref{fig:sa-porcentaje-nucleo}).
 
 \begin{figure}[H]
@@ -672,7 +466,33 @@ El siguiente gráfico de radar muestra los porcentajes de aprobación del estudi
   \label{fig:sa-porcentaje-nucleo}
 \end{figure}
 
-\paragraph{Notas} \mbox{}\\
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /alumnos/<legajo>/porcentajes-nucleos \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+Cada carrera tiene sus propios núcleos. En particular, y tomado a forma de ejemplo, los núcleos de la Licenciatura en Informática se muestran en la Tabla ~\ref{tab:tabla_nucleos}.
+
+\begin{table}[!htbp]
+    \centering
+    \makegapedcells
+    \begin{tabular}{|c|c|}
+    \hline
+    Código & Nombre \\ \hline
+    I & Introductorio \\ \hline
+    B & Básico\\ \hline
+    A & Avanzado \\ \hline
+    C & Complementario/Orientativo \\ \hline
+    \end{tabular}
+    \caption{Núcleos de la Licenciatura en Informática}
+    \label{tab:tabla_nucleos}
+\end{table}
+
+
+\paragraph{Notas}\mbox{}\\
+
+Dado un estudiante, se obtienen las diferentes notas que tuvo a lo largo de sus cursadas.
 La siguiente tabla muestra las notas del estudiante dentro del rango seleccionado (Figura~\ref{fig:sa-notas}).
 
 \begin{figure}[H]
@@ -682,6 +502,216 @@ La siguiente tabla muestra las notas del estudiante dentro del rango seleccionad
   \label{fig:sa-notas}
 \end{figure}
 
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /alumnos/<legajo>/notas \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+\paragraph{Porcentaje de avance de carrera}\mbox{}\\
+
+Dado un legajo de estudiante, se realiza un análisis para determinar el porcentaje de avance de la carrera, según el plan que se analice. Dado que cada plan tiene una cantidad distinta de materias, este dato cambia según el plan que se analice.
+
+Además, este dato es analizado en base a las fechas pedidas en el reporte.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-porcentajeavance.png}
+  \captionof{figure}{Porcentaje de avance de carrera}
+  \label{fig:sa-porcentajeavance}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /alumnos/<legajo>/porcentaje-carrera \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+
+
+\paragraph{Promedio por períodos}\mbox{}\\
+
+Dado un estudiante, se calcula cuál fue su \textit{score} por cada período. Es decir, su rendimiento semestral. 
+
+El \textit{score} se calcula sacando un promedio de sus notas en un semestre. Las materias que sólo se distinguen entre “Aprobado” y “Desaprobado” y no disponen de una nota, se les asigna una nota para sacar este promedio.
+
+Las materias con nota “Aprobado” son consideradas como un 7, y las materias con nota “Desaprobado” son consideradas como un 3. Entonces, el \textit{score} no es un promedio preciso, sino una estipulación de lo que fué su rendimiento en ese período.
+
+Este \textit{score} es útil para analizar el rendimiento de un estudiante y puede servirle a las carreras para tomar decisiones tempranas.
+
+El siguiente gráfico muestra el desempeño del estudiante semestralmente dentro del rango seleccionado  (Figura~\ref{fig:sa-desempenio}).
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-desempeño.png}
+  \captionof{figure}{Detalle de aprobación}
+  \label{fig:sa-desempenio}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /alumnos/<legajo>/scores \\
+
+Parámetros adicionales: carrera, inicio, fin, plan \\
+
+
+
+\subsubsection{Análisis sobre carreras}
+
+\paragraph{Cantidad de estudiantes por semestre}\mbox{}\\
+
+Dada una carrera, se obtiene un listado de cantidad de inscriptos por semestre
+
+El siguiente gráfico es en forma de \textit{área}, y muestra la cantidad de ingresos semestrales histórico de la carrera. De esta forma, se puede observar en qué momento hubo picos de ingresos y en qué momentos hubo menos (Figura~\ref{fig:sa-ingresos-semestre}).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresossemestre.png}
+  \captionof{figure}{Ingresos por semestre}
+  \label{fig:sa-ingresos-semestre}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/alumnos \\
+
+
+
+\paragraph{Datos generales por cohorte}\mbox{}\\
+
+Dada una carrera, se obtiene un listado de inscriptos, cursantes, graduados y postulantes por cohorte.
+
+La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de cursantes hubo, la cantidad de ingresantes y la cantidad de graduados  (Figura~\ref{fig:sa-alumnos-cohorte}).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-alumnos-cohorte.png}
+  \captionof{figure}{Tabla de estudiantes por cohorte}
+  \label{fig:sa-alumnos-cohorte}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/cantidades-alumnos \\
+
+
+\paragraph{Ingresantes por cohorte}\mbox{}\\
+
+
+Dada una carrera, se obtiene la cantidad de ingresantes separadas por año.
+
+La siguiente es una tabla que detalla año a año de la carrera, qué cantidad de ingresantes hubo  (Figura~\ref{fig:sa-ingresantes-cohorte}).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresantes-cohorte.png}
+  \captionof{figure}{Tabla de ingresantes por cohorte}
+  \label{fig:sa-ingresantes-cohorte}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/cantidades-ingresantes \\
+
+
+\paragraph{Cantidad de cursantes actual}\mbox{}\\
+
+Dada una carrera, se obtiene la cantidad de cursantes actual.
+
+La cantidad actual de cursantes de la carrera se muestra en forma de tarjeta informativa (Figura~\ref{fig:sa-cursantes}). 
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-cursantes.png}
+  \captionof{figure}{Cantidad de cursantes}
+  \label{fig:sa-cursantes}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/cursantes-actual \\
+
+
+\paragraph{Cantidad de ingresantes actual}\mbox{}\\
+Dada una carrera, se obtiene la cantidad de ingresantes.
+
+La cantidad actual de ingresantes de la carrera se muestra en forma de tarjeta informativa (Figura~\ref{fig:sa-ingresantes}).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-ingresantes.png}
+  \captionof{figure}{Cantidad de ingresantes}
+  \label{fig:sa-ingresantes}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/ingresantes-actual \\
+
+
+
+\paragraph{Cantidad total de graduados} \mbox{}\\
+
+Dada una carrera, se obtiene el total de graduados.
+
+La cantidad total de graduados de la carrera se muestra en forma de tarjeta informativa (Figura~\ref{fig:sa-graduados}).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-graduados.png}
+  \captionof{figure}{Cantidad de graduados}
+  \label{fig:sa-graduados}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/graduados-total \\
+
+\paragraph{Dispersión de scores y promedios}\mbox{}\\
+El objetivo de este análisis es el agrupar estudiantes en base al \textit{score} y al promedio. Mostrando grupos de interés sobre los cuales se podrán implementar acciones específicas.
+
+La Figura~\ref{fig:sa-dispersion} muestra un gráfico con la dispersión de los estudiantes con respecto a su promedio general y su desempeño el último año. Uno de los ejes tiene en cuenta el promedio y el otro su score el último año. De esta manera, se puede observar de forma gráfica los estudiantes que se desempeñaron por encima de su historial y cuáles no.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-dispersion.png}
+  \captionof{figure}{Gráfico de dispersión}
+  \label{fig:sa-dispersion}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/dispersion-score-promedio \\
+
+\paragraph{Materias que demoran la formación}\mbox{}\\
+
+Dada una carrera, se quiere analizar qué materias son las que demoran la formación de los estudiantes. 
+Para poder realizar este análisis, se necesitaron los siguientes datos:
+\begin{outline}
+\1 Índice de aprobación de una materia (cantidad de aprobados / cantidad total de cursantes).
+\1 Cuántas materias obligatorias dependen de ella.
+\end{outline}
+
+Luego de calcular estos datos materia por materia, se calcula un \textit{score}. Este \textit{score} determina qué materia puede llegar a demorar la carrera de un estudiante.
+
+\begin{align*}
+  Score = (1 - IndiceAprobacion) * CantidadObligatoriasDependientes\\
+\end{align*}
+
+Es decir, que una materia que tiene un porcentaje de aprobación del 75\% y 10 materias que son obligatorias y dependen de ésta para ser cursadas, tendrá un puntaje de 2.5 ((1 - 0.75) * 10).
+
+
+La siguiente tabla muestra un puntaje por materia en base a su porcentaje de aprobación y sobre la dependencia que tienen otras materias sobre ésta para ser cursadas  (Figura~\ref{fig:sa-materias-traba}).
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.4]{images/seguimiento-academico/sa-materias-traba.png}
+  \captionof{figure}{Tabla de ingresantes por cohorte}
+  \label{fig:sa-materias-traba}
+\end{figure}
+
+Estos datos son obtenidos a través de la aplicación de análisis de datos a través de la siguiente URI:
+
+URI: /carreras/<carrera>/materias-traba \\
 
 
 \section{Licencia}
